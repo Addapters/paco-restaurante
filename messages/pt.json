@@ -25,7 +25,21 @@
   },
   "Cliente": {
     "title": "Área de Cliente",
-    "description": "Aqui vais poder ver o menu, reservar mesa e fazer pedidos."
+    "description": "Aqui vais poder ver o menu, reservar mesa e fazer pedidos.",
+    "verMenu": "Ver o menu"
+  },
+  "Menu": {
+    "title": "O nosso menu",
+    "subtitle": "Cozinha portuguesa de conforto, feita com produto da época.",
+    "destaque": "Sugestão do chef"
+  },
+  "Mesa": {
+    "mesa": "Mesa {numero}",
+    "bemVindo": "Bem-vindo ao Paco!",
+    "intro": "Espreita o menu e as campanhas do dia. Quando quiseres, chama a equipa — estamos já aí.",
+    "campanhas": "Campanhas e Dias Especiais",
+    "menuTitle": "Menu",
+    "verSite": "Visitar o site do restaurante"
   },
   "Staff": {
     "title": "Área de Staff",

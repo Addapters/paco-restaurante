@@ -40,3 +40,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# QR codes gerados (recriáveis com scripts/generate-qr-codes.mjs)
+qr-codes/

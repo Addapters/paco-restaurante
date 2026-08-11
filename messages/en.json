@@ -25,7 +25,21 @@
   },
   "Cliente": {
     "title": "Customer Area",
-    "description": "Here you'll be able to browse the menu, book a table and place orders."
+    "description": "Here you'll be able to browse the menu, book a table and place orders.",
+    "verMenu": "View the menu"
+  },
+  "Menu": {
+    "title": "Our menu",
+    "subtitle": "Portuguese comfort food, made with seasonal produce.",
+    "destaque": "Chef's choice"
+  },
+  "Mesa": {
+    "mesa": "Table {numero}",
+    "bemVindo": "Welcome to Paco!",
+    "intro": "Browse the menu and today's specials. Whenever you're ready, call our team — we'll be right there.",
+    "campanhas": "Specials & Special Days",
+    "menuTitle": "Menu",
+    "verSite": "Visit the restaurant website"
   },
   "Staff": {
     "title": "Staff Area",
