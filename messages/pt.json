@@ -1,0 +1,38 @@
+{
+  "Common": {
+    "appName": "Paco Restaurante",
+    "language": "Idioma",
+    "loading": "A carregar…"
+  },
+  "Home": {
+    "title": "Paco Restaurante",
+    "subtitle": "Bem-vindo. Escolhe a tua área para continuar.",
+    "areas": {
+      "cliente": {
+        "title": "Cliente",
+        "description": "Consulta o menu, faz reservas e pedidos."
+      },
+      "staff": {
+        "title": "Staff",
+        "description": "Gestão de pedidos e serviço de sala."
+      },
+      "admin": {
+        "title": "Administração",
+        "description": "Gestão do restaurante, menu e equipa."
+      }
+    },
+    "enter": "Entrar"
+  },
+  "Cliente": {
+    "title": "Área de Cliente",
+    "description": "Aqui vais poder ver o menu, reservar mesa e fazer pedidos."
+  },
+  "Staff": {
+    "title": "Área de Staff",
+    "description": "Aqui vais poder gerir pedidos e o serviço de sala."
+  },
+  "Admin": {
+    "title": "Área de Administração",
+    "description": "Aqui vais poder gerir o menu, a equipa e as definições do restaurante."
+  }
+}

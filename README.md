@@ -1,36 +1,52 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Paco Restaurante
 
-## Getting Started
+Aplicação web do restaurante Paco, construída com Next.js (App Router), TypeScript, Tailwind CSS, Supabase e next-intl.
 
-First, run the development server:
+## Áreas da aplicação
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- **/cliente** — menu, reservas e pedidos
+- **/staff** — gestão de pedidos e serviço de sala
+- **/admin** — gestão do restaurante, menu e equipa
+
+Cada área tem o seu próprio layout (`src/app/[locale]/<área>/layout.tsx`) e partilha os componentes de UI em `src/components/ui`.
+
+## Tema (Tailwind v4 — definido em `src/app/globals.css`)
+
+| Token | Cor | Uso |
+| --- | --- | --- |
+| `cream` | `#EFE8DE` | fundo (bege) |
+| `terracotta` | `#D39F80` | destaque / CTA |
+| `sage` | `#76907C` | secundária (verde salva) |
+| `ink` | `#353D4D` | texto |
+| `paper` / `charcoal` / `smoke` | branco / cinza escuro / cinza | neutros |
+
+Usar como classes normais do Tailwind: `bg-cream`, `bg-terracotta`, `text-ink`, etc.
+
+## Idiomas
+
+Internacionalização com **next-intl**. Português é o idioma por defeito (sem prefixo no URL); inglês fica em `/en/...`. As traduções estão em `messages/pt.json` e `messages/en.json`.
+
+## Supabase
+
+Cria um projeto em [supabase.com](https://supabase.com) e preenche o `.env.local` (ver `.env.example`):
+
+```
+NEXT_PUBLIC_SUPABASE_URL=...
+NEXT_PUBLIC_SUPABASE_ANON_KEY=...
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Clientes reutilizáveis:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- `src/lib/supabase/client.ts` — para Client Components
+- `src/lib/supabase/server.ts` — para Server Components / Actions / Route Handlers
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Desenvolvimento
 
-## Learn More
+```bash
+npm install
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
+## Deploy (Vercel)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+O projeto está pronto para deploy automático na Vercel: importa o repositório GitHub em [vercel.com/new](https://vercel.com/new) e define as variáveis de ambiente `NEXT_PUBLIC_SUPABASE_URL` e `NEXT_PUBLIC_SUPABASE_ANON_KEY` nas definições do projeto.

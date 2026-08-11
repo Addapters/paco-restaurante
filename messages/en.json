@@ -1,0 +1,38 @@
+{
+  "Common": {
+    "appName": "Paco Restaurante",
+    "language": "Language",
+    "loading": "Loading…"
+  },
+  "Home": {
+    "title": "Paco Restaurante",
+    "subtitle": "Welcome. Choose your area to continue.",
+    "areas": {
+      "cliente": {
+        "title": "Customer",
+        "description": "Browse the menu, make reservations and place orders."
+      },
+      "staff": {
+        "title": "Staff",
+        "description": "Order management and floor service."
+      },
+      "admin": {
+        "title": "Admin",
+        "description": "Manage the restaurant, menu and team."
+      }
+    },
+    "enter": "Enter"
+  },
+  "Cliente": {
+    "title": "Customer Area",
+    "description": "Here you'll be able to browse the menu, book a table and place orders."
+  },
+  "Staff": {
+    "title": "Staff Area",
+    "description": "Here you'll be able to manage orders and floor service."
+  },
+  "Admin": {
+    "title": "Admin Area",
+    "description": "Here you'll be able to manage the menu, the team and restaurant settings."
+  }
+}
