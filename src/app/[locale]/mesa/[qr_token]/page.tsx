@@ -12,6 +12,8 @@ import { TableActions } from "@/components/mesa/TableActions";
 import { OrdersHistory } from "@/components/mesa/OrdersHistory";
 import { CartBar } from "@/components/mesa/CartBar";
 import { SurveyInvite } from "@/components/mesa/SurveyInvite";
+import { SeatPicker } from "@/components/mesa/SeatPicker";
+import { MesaSeatsView } from "@/components/mesa/MesaSeatsView";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 
 const UUID_RE =
@@ -29,7 +31,7 @@ async function getMesaByQrToken(qrToken: string) {
   const admin = createAdminClient();
   const { data } = await admin
     .from("restaurant_tables")
-    .select("id, numero, mesa_apadrinhada_cliente_id")
+    .select("id, numero, capacidade, mesa_apadrinhada_cliente_id")
     .eq("qr_token", qrToken)
     .maybeSingle();
   return data;
@@ -72,14 +74,17 @@ export default async function MesaPage({
     getPadrinhoNome(mesa.mesa_apadrinhada_cliente_id),
   ]);
 
+  const mesaInfo = {
+    id: mesa.id,
+    numero: mesa.numero,
+    qrToken: qr_token,
+    capacidade: mesa.capacidade ?? 4,
+  };
+
   return (
-    <MesaOrdersProvider
-      mesa={{ id: mesa.id, numero: mesa.numero, qrToken: qr_token }}
-    >
+    <MesaOrdersProvider mesa={mesaInfo}>
     <div className="flex min-h-screen flex-col pb-24">
-      <MesaSession
-        mesa={{ id: mesa.id, numero: mesa.numero, qrToken: qr_token }}
-      />
+      <MesaSession mesa={mesaInfo} />
 
       <header className="border-b-4 border-terracotta bg-paper px-6 py-4 shadow-sm">
         <div className="mx-auto flex w-full max-w-5xl items-center justify-between">
@@ -110,6 +115,8 @@ export default async function MesaPage({
 
         <TableActions />
 
+        <MesaSeatsView />
+
         <OrdersHistory />
 
         <CampaignsSection locale={locale} />
@@ -134,6 +141,7 @@ export default async function MesaPage({
       </footer>
 
       <CartBar categories={categories} />
+      <SeatPicker />
       <SurveyInvite />
     </div>
     </MesaOrdersProvider>

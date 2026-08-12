@@ -117,6 +117,19 @@
       "servido": "Servido",
       "pago": "Pago"
     },
+    "lugar": {
+      "titulo": "Qual é o teu lugar?",
+      "nota": "Mesa {numero} — escolhe o teu lugar para associarmos os pedidos.",
+      "cancelar": "Cancelar",
+      "chip": "Lugar {n}"
+    },
+    "mesaView": {
+      "titulo": "A tua mesa ({numero})",
+      "lugarN": "Lugar {n}",
+      "oTeuLugar": "o teu lugar",
+      "semItens": "Sem pedidos.",
+      "semLugar": "Sem lugar atribuído"
+    },
     "upsell": {
       "titulo": "Que tal juntar…",
       "motivos": {
@@ -236,11 +249,43 @@
   "StaffPanel": {
     "sair": "Sair",
     "mesas": {
-      "title": "Mesas",
+      "title": "Planta da sala",
       "mesa": "Mesa {numero}",
       "livre": "Livre",
       "ocupada": "Ocupada",
       "alerta": "Alerta!"
+    },
+    "planta": {
+      "salas": {
+        "salao": "Salão principal",
+        "terraco": "Terraço"
+      },
+      "mesaAria": "Mesa {numero}",
+      "salaVazia": "Sem mesas nesta sala.",
+      "legenda": {
+        "livre": "Livre",
+        "ocupada": "Ocupada",
+        "alerta": "Alerta",
+        "selecionada": "Selecionada"
+      },
+      "painel": {
+        "titulo": "Mesa {numero} · {capacidade} lugares",
+        "responsavel": "Responsável",
+        "assumir": "Assumir mesa",
+        "libertar": "Libertar mesa",
+        "fechar": "Fechar painel",
+        "lugarN": "Lugar {n}",
+        "lugarVazio": "Sem pedidos.",
+        "semLugar": "Sem lugar atribuído",
+        "novoPedido": "Novo pedido nesta mesa",
+        "novoPedidoNota": "Escolhe primeiro o lugar; os itens ficam associados a esse lugar.",
+        "escolherItem": "Escolher item…",
+        "quantidade": "Quantidade",
+        "adicionarItem": "Adicionar item",
+        "criarPedido": "Criar pedido (lugar {n})",
+        "aCriar": "A criar…",
+        "erroCriar": "Não foi possível criar o pedido."
+      }
     },
     "alertas": {
       "title": "Alertas",

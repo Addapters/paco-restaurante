@@ -23,6 +23,8 @@ export function CartBar({ categories = [] }: { categories?: MenuCategory[] }) {
     setQuantity,
     submitting,
     submitOrder,
+    lugar,
+    abrirEscolhaDeLugar,
   } = useMesaOrders();
   const t = useTranslations("Pedido");
   const locale = useLocale() as Locale;
@@ -132,7 +134,21 @@ export function CartBar({ categories = [] }: { categories?: MenuCategory[] }) {
                 onClick={() => setOpen((v) => !v)}
               >
                 <span className="block text-xs text-smoke">
-                  {t("itens", { count: cartCount })} · {open ? "▾" : "▴"}
+                  {t("itens", { count: cartCount })}
+                  {lugar != null && (
+                    <span
+                      role="button"
+                      tabIndex={0}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        abrirEscolhaDeLugar();
+                      }}
+                      className="ml-2 rounded-full bg-sage/15 px-2 py-0.5 text-xs font-medium text-sage-dark hover:bg-sage/25"
+                    >
+                      {t("lugar.chip", { n: lugar })} ✎
+                    </span>
+                  )}{" "}
+                  · {open ? "▾" : "▴"}
                 </span>
                 <span className="font-bold text-ink">
                   {t("total")}: {formatPrice(cartTotal, locale)}

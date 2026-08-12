@@ -6,6 +6,7 @@ export interface MesaInfo {
   id: string;
   numero: number;
   qrToken: string;
+  capacidade: number;
 }
 
 const STORAGE_KEY = "paco.mesa";

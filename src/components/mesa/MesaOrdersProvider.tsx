@@ -50,6 +50,13 @@ interface MesaOrdersContextValue {
   // (gatilho do convite ao inquérito de satisfação)
   refeicaoPaga: boolean;
   dismissRefeicaoPaga(): void;
+  // Lugar do cliente na mesa (1..capacidade): pedido antes do primeiro
+  // item entrar no carrinho; os itens ficam associados a este lugar
+  lugar: number | null;
+  pedirLugarAberto: boolean;
+  abrirEscolhaDeLugar(): void;
+  escolherLugar(n: number): void;
+  fecharEscolhaDeLugar(): void;
 }
 
 const MesaOrdersContext = createContext<MesaOrdersContextValue | null>(null);
@@ -70,6 +77,24 @@ export function MesaOrdersProvider({
   const [submitting, setSubmitting] = useState(false);
   const [uid, setUid] = useState<string | null>(null);
   const [refeicaoPaga, setRefeicaoPaga] = useState(false);
+  // Lazy init: retoma o lugar guardado nesta sessão do browser (o SSR
+  // devolve null; sem diferença visual na hidratação porque o carrinho
+  // começa vazio)
+  const [lugar, setLugar] = useState<number | null>(() => {
+    if (typeof window === "undefined") return null;
+    const guardado = Number(
+      sessionStorage.getItem(`paco.lugar.${mesa.id}`)
+    );
+    return guardado >= 1 && guardado <= mesa.capacidade ? guardado : null;
+  });
+  const [pedirLugarAberto, setPedirLugarAberto] = useState(false);
+  // Item que ficou à espera da escolha de lugar (primeiro "Adicionar")
+  const [itemPendente, setItemPendente] = useState<Omit<
+    CartLine,
+    "quantidade"
+  > | null>(null);
+
+  const lugarStorageKey = `paco.lugar.${mesa.id}`;
 
   const ensureUid = useCallback(async (): Promise<string | null> => {
     const {
@@ -141,17 +166,48 @@ export function MesaOrdersProvider({
     };
   }, [uid, supabase, mesa.id, loadOrders]);
 
-  const addToCart = useCallback((item: Omit<CartLine, "quantidade">) => {
-    setCart((prev) => {
-      const existing = prev.find((l) => l.itemId === item.itemId);
-      if (existing) {
-        return prev.map((l) =>
-          l.itemId === item.itemId ? { ...l, quantidade: l.quantidade + 1 } : l
-        );
+  const adicionarAoCarrinho = useCallback(
+    (item: Omit<CartLine, "quantidade">) => {
+      setCart((prev) => {
+        const existing = prev.find((l) => l.itemId === item.itemId);
+        if (existing) {
+          return prev.map((l) =>
+            l.itemId === item.itemId
+              ? { ...l, quantidade: l.quantidade + 1 }
+              : l
+          );
+        }
+        return [...prev, { ...item, quantidade: 1 }];
+      });
+    },
+    []
+  );
+
+  // O primeiro item só entra depois de o cliente indicar o seu lugar
+  const addToCart = useCallback(
+    (item: Omit<CartLine, "quantidade">) => {
+      if (lugar == null) {
+        setItemPendente(item);
+        setPedirLugarAberto(true);
+        return;
       }
-      return [...prev, { ...item, quantidade: 1 }];
-    });
-  }, []);
+      adicionarAoCarrinho(item);
+    },
+    [lugar, adicionarAoCarrinho]
+  );
+
+  const escolherLugar = useCallback(
+    (n: number) => {
+      setLugar(n);
+      sessionStorage.setItem(lugarStorageKey, String(n));
+      setPedirLugarAberto(false);
+      if (itemPendente) {
+        adicionarAoCarrinho(itemPendente);
+        setItemPendente(null);
+      }
+    },
+    [lugarStorageKey, itemPendente, adicionarAoCarrinho]
+  );
 
   const setQuantity = useCallback((itemId: string, quantidade: number) => {
     setCart((prev) =>
@@ -173,6 +229,7 @@ export function MesaOrdersProvider({
         p_items: cart.map((l) => ({
           menu_item_id: l.itemId,
           quantidade: l.quantidade,
+          lugar_numero: lugar,
         })),
       });
       if (error) return false;
@@ -184,7 +241,7 @@ export function MesaOrdersProvider({
     } finally {
       setSubmitting(false);
     }
-  }, [cart, submitting, ensureUid, supabase, mesa.id, loadOrders]);
+  }, [cart, lugar, submitting, ensureUid, supabase, mesa.id, loadOrders]);
 
   const sendAlert = useCallback(
     async (tipo: AlertTipo): Promise<boolean> => {
@@ -216,6 +273,14 @@ export function MesaOrdersProvider({
         sendAlert,
         refeicaoPaga,
         dismissRefeicaoPaga: () => setRefeicaoPaga(false),
+        lugar,
+        pedirLugarAberto,
+        abrirEscolhaDeLugar: () => setPedirLugarAberto(true),
+        escolherLugar,
+        fecharEscolhaDeLugar: () => {
+          setPedirLugarAberto(false);
+          setItemPendente(null);
+        },
       }}
     >
       {children}

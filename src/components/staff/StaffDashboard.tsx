@@ -8,10 +8,11 @@ import { Button, Card } from "@/components/ui";
 import { EstadoBadge, type OrderEstado } from "@/components/EstadoBadge";
 import { NewOrderForm } from "./NewOrderForm";
 import { PaymentDialog } from "./PaymentDialog";
+import { FloorPlan, type MesaEstadoVisual } from "./FloorPlan";
+import { MesaDetailPanel } from "./MesaDetailPanel";
 import { Link } from "@/i18n/navigation";
 import type { ResultadoPagamento } from "@/app/actions/faturacao";
 import { formatPrice } from "@/lib/format";
-import { cn } from "@/lib/utils";
 
 export type AlertTipo = "chamar_staff" | "pedir_conta";
 export type OrderOrigem =
@@ -23,6 +24,12 @@ export type OrderOrigem =
 export interface Mesa {
   id: string;
   numero: number;
+  capacidade: number;
+  sala: "salao" | "terraco";
+  pos_x: number;
+  pos_y: number;
+  forma: "redonda" | "retangular";
+  staff_responsavel_id: string | null;
 }
 
 interface TableAlert {
@@ -46,6 +53,7 @@ export interface StaffOrder {
     preco_unitario: number;
     e_oferta: boolean;
     motivo_oferta: string | null;
+    lugar_numero: number | null;
     menu_items: { nome_pt: string; nome_en: string } | null;
   }[];
 }
@@ -56,7 +64,10 @@ interface InvoiceRef {
 }
 
 const ORDER_SELECT =
-  "id, mesa_id, origem, estado, criado_em, restaurant_tables(numero), order_items(id, quantidade, preco_unitario, e_oferta, motivo_oferta, menu_items(nome_pt, nome_en))";
+  "id, mesa_id, origem, estado, criado_em, restaurant_tables(numero), order_items(id, quantidade, preco_unitario, e_oferta, motivo_oferta, lugar_numero, menu_items(nome_pt, nome_en))";
+
+const MESA_SELECT =
+  "id, numero, capacidade, sala, pos_x, pos_y, forma, staff_responsavel_id";
 
 // "servido → pago" passa pelo diálogo de pagamento (método + fatura),
 // não pelo avanço direto de estado.
@@ -84,6 +95,11 @@ export function StaffDashboard() {
   const [orders, setOrders] = useState<StaffOrder[]>([]);
   const [invoices, setInvoices] = useState<Map<string, InvoiceRef>>(new Map());
   const [pagamentoDe, setPagamentoDe] = useState<StaffOrder | null>(null);
+  const [nomeDoStaff, setNomeDoStaff] = useState<Map<string, string>>(
+    new Map()
+  );
+  const [meuId, setMeuId] = useState<string | null>(null);
+  const [mesaSelecionada, setMesaSelecionada] = useState<string | null>(null);
   // Item em marcação de oferta: pede o motivo antes de gravar
   const [ofertaDe, setOfertaDe] = useState<{
     orderId: string;
@@ -106,11 +122,16 @@ export function StaffDashboard() {
   // Carga inicial
   useEffect(() => {
     (async () => {
-      const [{ data: m }, { data: a }, { data: o }, { data: inv }] =
+      const {
+        data: { user },
+      } = await supabase.auth.getUser();
+      setMeuId(user?.id ?? null);
+
+      const [{ data: m }, { data: a }, { data: o }, { data: inv }, { data: st }] =
         await Promise.all([
           supabase
             .from("restaurant_tables")
-            .select("id, numero")
+            .select(MESA_SELECT)
             .order("numero"),
           supabase
             .from("table_alerts")
@@ -127,8 +148,20 @@ export function StaffDashboard() {
             .select("order_id, numero_fatura, url")
             .order("criado_em", { ascending: false })
             .limit(100),
+          supabase
+            .from("profiles")
+            .select("id, nome")
+            .in("role", ["staff", "admin"]),
         ]);
       setMesas((m as Mesa[]) ?? []);
+      setNomeDoStaff(
+        new Map(
+          ((st as { id: string; nome: string }[]) ?? []).map((p) => [
+            p.id,
+            p.nome,
+          ])
+        )
+      );
       setAlerts((a as TableAlert[]) ?? []);
       setOrders((o as unknown as StaffOrder[]) ?? []);
       setInvoices(
@@ -195,12 +228,40 @@ export function StaffDashboard() {
           );
         }
       )
+      .on(
+        "postgres_changes",
+        { event: "UPDATE", schema: "public", table: "restaurant_tables" },
+        (payload) => {
+          // Assumir/libertar mesa propaga a todos os ecrãs de staff
+          const upd = payload.new as Mesa;
+          setMesas((prev) =>
+            prev.map((m) => (m.id === upd.id ? { ...m, ...upd } : m))
+          );
+        }
+      )
       .subscribe();
 
     return () => {
       supabase.removeChannel(channel);
     };
   }, [supabase, fetchOrderById]);
+
+  async function atribuirMesa(mesaId: string, assumir: boolean) {
+    const { error } = await supabase.rpc("atribuir_mesa", {
+      p_mesa_id: mesaId,
+      p_assumir: assumir,
+    });
+    if (!error) {
+      setMesas((prev) =>
+        prev.map((m) =>
+          m.id === mesaId
+            ? { ...m, staff_responsavel_id: assumir ? meuId : null }
+            : m
+        )
+      );
+    }
+    return !error;
+  }
 
   async function marcarAtendido(alertId: string) {
     setAlerts((prev) => prev.filter((a) => a.id !== alertId)); // otimista
@@ -304,31 +365,36 @@ export function StaffDashboard() {
 
   return (
     <div className="space-y-10">
-      {/* 1. Vista geral das mesas */}
+      {/* 1. Planta da sala */}
       <section>
         <h2 className="mb-4 text-xl font-bold text-ink">{t("mesas.title")}</h2>
-        <div className="grid grid-cols-3 gap-3 sm:grid-cols-5 lg:grid-cols-10">
-          {mesas.map((mesa) => {
-            const estado = mesaEstado.get(mesa.id) ?? "livre";
+        <FloorPlan
+          mesas={mesas}
+          estadoDe={mesaEstado as Map<string, MesaEstadoVisual>}
+          selecionada={mesaSelecionada}
+          onSelect={(id) =>
+            setMesaSelecionada((atual) => (atual === id ? null : id))
+          }
+          nomeDoStaff={nomeDoStaff}
+        />
+        {mesaSelecionada &&
+          (() => {
+            const mesa = mesas.find((m) => m.id === mesaSelecionada);
+            if (!mesa) return null;
             return (
-              <div
-                key={mesa.id}
-                className={cn(
-                  "flex flex-col items-center rounded-xl border-2 p-3 text-center",
-                  estado === "livre" && "border-ink/15 bg-paper text-smoke",
-                  estado === "ocupada" && "border-sage bg-sage/15 text-sage-dark",
-                  estado === "alerta" &&
-                    "animate-pulse border-terracotta bg-terracotta/20 text-terracotta-dark"
-                )}
-              >
-                <span className="text-lg font-bold">{mesa.numero}</span>
-                <span className="text-xs font-medium">
-                  {t(`mesas.${estado}`)}
-                </span>
+              <div className="mt-4">
+                <MesaDetailPanel
+                  mesa={mesa}
+                  orders={orders}
+                  nomeDoStaff={nomeDoStaff}
+                  meuId={meuId}
+                  onAtribuir={atribuirMesa}
+                  onAvancar={avancarEstado}
+                  onFechar={() => setMesaSelecionada(null)}
+                />
               </div>
             );
-          })}
-        </div>
+          })()}
       </section>
 
       {/* 2. Painel de alertas */}
