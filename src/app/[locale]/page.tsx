@@ -144,6 +144,9 @@ export default async function HomePage({
                             fill
                             sizes="(max-width: 640px) 100vw, 25vw"
                             className="object-cover"
+                            // Ficheiros locais: contorna um bug do otimizador de
+                            // imagens da Vercel que troca bytes entre pedidos concorrentes
+                            unoptimized={item.foto_url.startsWith("/")}
                           />
                         </div>
                       )}

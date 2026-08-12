@@ -35,6 +35,9 @@ function MenuItemCard({
             fill
             sizes="96px"
             className="object-cover"
+            // Ficheiros locais: contorna um bug do otimizador de imagens
+            // da Vercel que troca bytes entre pedidos concorrentes
+            unoptimized={item.foto_url.startsWith("/")}
           />
         </div>
       )}
