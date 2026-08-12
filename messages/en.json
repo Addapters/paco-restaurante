@@ -123,6 +123,41 @@
       "agora_nao": "Not now"
     }
   },
+  "Fecho": {
+    "title": "End of day",
+    "voltar": "Back to dashboard",
+    "totalFaturado": "Total billed today",
+    "porMetodo": "By payment method",
+    "metodos": {
+      "dinheiro": "Cash",
+      "multibanco_tpa": "Card (terminal)",
+      "parceiro": "Partner platform"
+    },
+    "ofertas": "Offers / returns",
+    "ofertasValor": "Original value: {valor}",
+    "contagem": {
+      "title": "Cash count",
+      "nota": "Enter the amounts actually counted. The system only expects to find the cash-paid total in the drawer — card and partner payments settle through the bank.",
+      "caixa": "Cash drawer (€)",
+      "cofre": "Safe (€)",
+      "esperado": "Expected by the system (cash)",
+      "contado": "Counted (drawer + safe)",
+      "diferenca": "Difference",
+      "registar": "Record closure",
+      "confirmarPergunta": "Confirm the closure with a difference of {diferenca}?",
+      "confirmarSim": "Yes, close the day",
+      "cancelar": "Cancel",
+      "aRegistar": "Recording…",
+      "erro": "We couldn't record the closure (is today already closed?).",
+      "jaFechado": "Today is already closed."
+    },
+    "historico": {
+      "title": "Closure history",
+      "vazio": "No closures recorded yet.",
+      "data": "Date",
+      "registadoPor": "Recorded by"
+    }
+  },
   "Fatura": {
     "numero": "Document",
     "mesa": "Table {numero}",

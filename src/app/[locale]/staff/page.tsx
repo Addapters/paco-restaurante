@@ -1,8 +1,11 @@
 import { redirect } from "@/i18n/navigation";
 import type { Locale } from "@/i18n/routing";
+import { getTranslations } from "next-intl/server";
+import { Link } from "@/i18n/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { StaffDashboard } from "@/components/staff/StaffDashboard";
 import { SignOutButton } from "@/components/SignOutButton";
+import { Button } from "@/components/ui";
 
 export default async function StaffPage({
   params,
@@ -31,11 +34,20 @@ export default async function StaffPage({
     });
   }
 
+  const t = await getTranslations("Fecho");
+
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <p className="text-sm text-smoke">{profile!.nome}</p>
-        <SignOutButton redirectTo="/staff/login" />
+        <div className="flex items-center gap-2">
+          <Link href="/staff/fecho">
+            <Button variant="outline" size="sm">
+              💶 {t("title")}
+            </Button>
+          </Link>
+          <SignOutButton redirectTo="/staff/login" />
+        </div>
       </div>
       <StaffDashboard />
     </div>

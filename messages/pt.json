@@ -123,6 +123,41 @@
       "agora_nao": "Agora não"
     }
   },
+  "Fecho": {
+    "title": "Fecho de dia",
+    "voltar": "Voltar ao painel",
+    "totalFaturado": "Total faturado hoje",
+    "porMetodo": "Por método de pagamento",
+    "metodos": {
+      "dinheiro": "Dinheiro",
+      "multibanco_tpa": "Multibanco (TPA)",
+      "parceiro": "Plataforma parceira"
+    },
+    "ofertas": "Ofertas / devoluções",
+    "ofertasValor": "Valor original: {valor}",
+    "contagem": {
+      "title": "Contagem de caixa",
+      "nota": "Introduz os valores realmente contados. O sistema espera encontrar em dinheiro apenas o total pago nesse método — multibanco e parceiros liquidam por via bancária.",
+      "caixa": "Valor em caixa (€)",
+      "cofre": "Valor em cofre (€)",
+      "esperado": "Esperado pelo sistema (dinheiro)",
+      "contado": "Contado (caixa + cofre)",
+      "diferenca": "Diferença",
+      "registar": "Registar fecho",
+      "confirmarPergunta": "Confirmar o fecho com diferença de {diferenca}?",
+      "confirmarSim": "Sim, fechar o dia",
+      "cancelar": "Cancelar",
+      "aRegistar": "A registar…",
+      "erro": "Não foi possível registar o fecho (já existe um fecho para hoje?).",
+      "jaFechado": "O dia de hoje já está fechado."
+    },
+    "historico": {
+      "title": "Histórico de fechos",
+      "vazio": "Ainda não há fechos registados.",
+      "data": "Data",
+      "registadoPor": "Registado por"
+    }
+  },
   "Fatura": {
     "numero": "Documento",
     "mesa": "Mesa {numero}",
