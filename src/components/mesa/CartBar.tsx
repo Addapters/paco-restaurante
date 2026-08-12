@@ -1,21 +1,42 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/routing";
+import type { MenuCategory } from "@/lib/menu";
+import { getUpsellEngine } from "@/lib/paco-ai";
 import { useMesaOrders } from "./MesaOrdersProvider";
 import { Button } from "@/components/ui";
 import { formatPrice } from "@/lib/format";
 
+const upsellEngine = getUpsellEngine();
+
 // Barra fixa no fundo com o resumo do carrinho; expande para rever
-// quantidades e submeter o pedido.
-export function CartBar() {
-  const { cart, cartCount, cartTotal, setQuantity, submitting, submitOrder } =
-    useMesaOrders();
+// quantidades e submeter o pedido. Com o menu disponível, o PACO.AI
+// sugere 1-2 itens complementares.
+export function CartBar({ categories = [] }: { categories?: MenuCategory[] }) {
+  const {
+    cart,
+    cartCount,
+    cartTotal,
+    addToCart,
+    setQuantity,
+    submitting,
+    submitOrder,
+  } = useMesaOrders();
   const t = useTranslations("Pedido");
   const locale = useLocale() as Locale;
   const [open, setOpen] = useState(false);
   const [feedback, setFeedback] = useState<"ok" | "erro" | null>(null);
+
+  const sugestoes = useMemo(
+    () =>
+      upsellEngine.sugerir(
+        cart.map((l) => l.itemId),
+        categories
+      ),
+    [cart, categories]
+  );
 
   if (cart.length === 0 && !feedback) return null;
 
@@ -72,6 +93,36 @@ export function CartBar() {
                     </span>
                   </div>
                 ))}
+              </div>
+            )}
+
+            {sugestoes.length > 0 && (
+              <div className="border-b border-ink/10 px-5 py-3">
+                <p className="text-xs font-semibold text-sage-dark">
+                  ✨ {t("upsell.titulo")}
+                </p>
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {sugestoes.map(({ item, motivo }) => (
+                    <button
+                      key={item.id}
+                      onClick={() =>
+                        addToCart({
+                          itemId: item.id,
+                          nome_pt: item.nome_pt,
+                          nome_en: item.nome_en,
+                          preco: item.preco,
+                        })
+                      }
+                      title={t(`upsell.motivos.${motivo}`)}
+                      className="flex items-center gap-1.5 rounded-full border border-sage bg-sage/10 px-3 py-1.5 text-xs font-medium text-ink transition-colors hover:bg-sage/25"
+                    >
+                      + {locale === "pt" ? item.nome_pt : item.nome_en}
+                      <span className="text-smoke">
+                        {formatPrice(item.preco, locale)}
+                      </span>
+                    </button>
+                  ))}
+                </div>
               </div>
             )}
 

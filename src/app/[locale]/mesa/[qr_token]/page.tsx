@@ -133,7 +133,7 @@ export default async function MesaPage({
         </div>
       </footer>
 
-      <CartBar />
+      <CartBar categories={categories} />
       <SurveyInvite />
     </div>
     </MesaOrdersProvider>

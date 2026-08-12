@@ -96,6 +96,13 @@
       "servido": "Servido",
       "pago": "Pago"
     },
+    "upsell": {
+      "titulo": "Que tal juntar…",
+      "motivos": {
+        "bebida_em_falta": "Ainda não tens bebida no pedido",
+        "destaque_da_categoria": "Sugestão do chef nesta categoria"
+      }
+    },
     "chamarStaff": "Chamar colaborador",
     "pedirConta": "Pedir a conta",
     "staffChamado": "Já vamos aí!",
@@ -265,6 +272,10 @@
       "mesas": "Mesas"
     },
     "dashboard": {
+      "pacoAi": {
+        "title": "PACO.AI — Resumo do dia",
+        "subtitle": "Gerado automaticamente por regras; preparado para evoluir para IA."
+      },
       "faturacaoMensal": "Faturação mensal",
       "ultimos12Meses": "últimos 12 meses",
       "maisVendidos": "Pratos mais vendidos",

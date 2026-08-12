@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 import { createClient } from "@/lib/supabase/client";
+import { getSurveyRouter } from "@/lib/paco-ai";
 import { Button, Card, CardTitle } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
@@ -11,8 +12,9 @@ const GOOGLE_REVIEWS_URL =
   process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL ??
   "https://www.google.com/maps/search/paco+restaurante";
 
-// A partir de 4 estrelas consideramos a experiência positiva
-const LIMIAR_POSITIVO = 4;
+// O encaminhamento (Google Reviews vs formulário privado) é decidido
+// pelo PACO.AI — hoje regras, amanhã possivelmente um modelo.
+const surveyRouter = getSurveyRouter();
 
 type Step = "pergunta" | "formulario" | "obrigado" | "redirecionar";
 
@@ -59,7 +61,7 @@ export function SurveyFlow({ mesaId }: { mesaId: string | null }) {
     setPontuacao(valor);
     setError(false);
 
-    if (valor >= LIMIAR_POSITIVO) {
+    if (surveyRouter.encaminhar(valor) === "google_reviews") {
       setBusy(true);
       const ok = await guardar(valor, "google_reviews");
       setBusy(false);

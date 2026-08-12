@@ -2,6 +2,11 @@ import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { requireRole } from "@/lib/auth-guard";
 import { createClient } from "@/lib/supabase/server";
+import {
+  getDailyBriefEngine,
+  recolherDadosDoDia,
+  type TipoDestaque,
+} from "@/lib/paco-ai";
 import { AdminNav } from "@/components/admin/AdminNav";
 import { SignOutButton } from "@/components/SignOutButton";
 import { Card, CardTitle } from "@/components/ui";
@@ -57,6 +62,12 @@ export default async function AdminPage({
 
   const t = await getTranslations("AdminArea.dashboard");
   const supabase = await createClient();
+
+  // PACO.AI — resumo diário do "secretário" (regras, sem LLM nesta fase)
+  const resumo = getDailyBriefEngine().gerarResumo(
+    await recolherDadosDoDia(supabase),
+    locale
+  );
 
   const umAnoAtras = new Date();
   umAnoAtras.setMonth(umAnoAtras.getMonth() - 11);
@@ -157,6 +168,36 @@ export default async function AdminPage({
         <AdminNav active="dashboard" />
         <SignOutButton redirectTo="/staff/login" />
       </div>
+
+      <section>
+        <Card className="border-sage/50 bg-sage/5">
+          <CardTitle>✨ {t("pacoAi.title")}</CardTitle>
+          <p className="mt-1 text-xs text-smoke">{t("pacoAi.subtitle")}</p>
+          <ul className="mt-4 space-y-2">
+            {resumo.destaques.map((d, i) => (
+              <li
+                key={i}
+                className={cn(
+                  "flex gap-2 rounded-lg p-3 text-sm",
+                  (
+                    {
+                      alerta: "bg-terracotta/10 text-terracotta-dark",
+                      aviso: "bg-terracotta/5 text-ink",
+                      positivo: "bg-sage/15 text-sage-dark",
+                      info: "bg-cream text-ink",
+                    } as Record<TipoDestaque, string>
+                  )[d.tipo]
+                )}
+              >
+                <span aria-hidden="true">
+                  {{ alerta: "⚠️", aviso: "❗", positivo: "📈", info: "ℹ️" }[d.tipo]}
+                </span>
+                {d.texto}
+              </li>
+            ))}
+          </ul>
+        </Card>
+      </section>
 
       <section className="grid gap-4 lg:grid-cols-2">
         <Card>
