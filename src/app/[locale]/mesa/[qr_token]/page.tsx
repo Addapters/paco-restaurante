@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { createClient } from "@/lib/supabase/server";
 import { getMenu } from "@/lib/menu";
 import { MenuList } from "@/components/menu/MenuList";
 import { MesaSession } from "@/components/mesa/MesaSession";
@@ -27,10 +28,31 @@ async function getMesaByQrToken(qrToken: string) {
   const admin = createAdminClient();
   const { data } = await admin
     .from("restaurant_tables")
-    .select("id, numero")
+    .select("id, numero, mesa_apadrinhada_cliente_id")
     .eq("qr_token", qrToken)
     .maybeSingle();
   return data;
+}
+
+// Mesa apadrinhada: se o cliente autenticado for o padrinho desta mesa,
+// devolve o nome para a mensagem personalizada de boas-vindas.
+async function getPadrinhoNome(
+  mesaApadrinhadaClienteId: string | null
+): Promise<string | null> {
+  if (!mesaApadrinhadaClienteId) return null;
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user || user.is_anonymous || user.id !== mesaApadrinhadaClienteId) {
+    return null;
+  }
+  const { data: profile } = await supabase
+    .from("profiles")
+    .select("nome, email")
+    .eq("id", user.id)
+    .single();
+  return profile?.nome || profile?.email || null;
 }
 
 export default async function MesaPage({
@@ -42,10 +64,11 @@ export default async function MesaPage({
   const mesa = await getMesaByQrToken(qr_token);
   if (!mesa) notFound();
 
-  const [t, tCommon, categories] = await Promise.all([
+  const [t, tCommon, categories, padrinhoNome] = await Promise.all([
     getTranslations("Mesa"),
     getTranslations("Common"),
     getMenu(),
+    getPadrinhoNome(mesa.mesa_apadrinhada_cliente_id),
   ]);
 
   return (
@@ -70,10 +93,19 @@ export default async function MesaPage({
       </header>
 
       <main className="mx-auto w-full max-w-5xl flex-1 space-y-12 px-6 py-10">
-        <div>
-          <h1 className="text-3xl font-bold text-ink">{t("bemVindo")}</h1>
-          <p className="mt-2 text-smoke">{t("intro")}</p>
-        </div>
+        {padrinhoNome ? (
+          <div className="rounded-2xl border-2 border-terracotta bg-terracotta/10 p-6">
+            <h1 className="text-3xl font-bold text-ink">
+              ★ {t("bemVindoPadrinho", { nome: padrinhoNome })}
+            </h1>
+            <p className="mt-2 text-ink/80">{t("introPadrinho")}</p>
+          </div>
+        ) : (
+          <div>
+            <h1 className="text-3xl font-bold text-ink">{t("bemVindo")}</h1>
+            <p className="mt-2 text-smoke">{t("intro")}</p>
+          </div>
+        )}
 
         <TableActions />
 

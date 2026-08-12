@@ -2,7 +2,8 @@
   "Common": {
     "appName": "Paco Restaurante",
     "language": "Idioma",
-    "loading": "A carregar…"
+    "loading": "A carregar…",
+    "sair": "Sair"
   },
   "Home": {
     "title": "Paco Restaurante",
@@ -26,7 +27,41 @@
   "Cliente": {
     "title": "Área de Cliente",
     "description": "Aqui vais poder ver o menu, reservar mesa e fazer pedidos.",
-    "verMenu": "Ver o menu"
+    "verMenu": "Ver o menu",
+    "oMeuPerfil": "O meu perfil",
+    "entrarRegistar": "Entrar / Registar"
+  },
+  "ClienteAuth": {
+    "login": "Entrar",
+    "registo": "Criar conta",
+    "nome": "Nome",
+    "email": "Email",
+    "password": "Palavra-passe",
+    "entrar": "Entrar",
+    "criarConta": "Criar conta",
+    "aProcessar": "A processar…",
+    "credenciaisInvalidas": "Email ou palavra-passe incorretos.",
+    "confirmaEmailTitle": "Confirma o teu email",
+    "confirmaEmail": "Enviámos um link de confirmação para {email}. Abre-o para ativares a tua conta."
+  },
+  "Perfil": {
+    "ola": "Olá, {nome}!",
+    "clienteFiel": "Cliente fiel",
+    "mesaHabitual": "Mesa habitual: {numero}",
+    "mesa": "Mesa {numero}",
+    "osTeusDados": "Os teus dados",
+    "historico": "As tuas visitas",
+    "semHistorico": "Ainda não tens pedidos registados. Até já!",
+    "form": {
+      "nome": "Nome",
+      "telefone": "Telefone",
+      "newsletter": "Quero receber novidades e campanhas por email",
+      "newsletterNota": "Podes cancelar a subscrição a qualquer momento.",
+      "guardar": "Guardar",
+      "aGuardar": "A guardar…",
+      "guardado": "Guardado",
+      "erro": "Não foi possível guardar. Tenta novamente."
+    }
   },
   "Menu": {
     "title": "O nosso menu",
@@ -37,6 +72,8 @@
     "mesa": "Mesa {numero}",
     "bemVindo": "Bem-vindo ao Paco!",
     "intro": "Espreita o menu e as campanhas do dia. Quando quiseres, chama a equipa — estamos já aí.",
+    "bemVindoPadrinho": "Bem-vindo de volta, {nome}!",
+    "introPadrinho": "A tua mesa está pronta, como sempre. É um gosto receber-te outra vez.",
     "campanhas": "Campanhas e Dias Especiais",
     "menuTitle": "Menu",
     "verSite": "Visitar o site do restaurante"
@@ -68,6 +105,19 @@
   "Staff": {
     "title": "Área de Staff",
     "description": "Aqui vais poder gerir pedidos e o serviço de sala."
+  },
+  "StaffPanel": {
+    "sair": "Sair",
+    "login": {
+      "title": "Entrar na área de staff",
+      "email": "Email",
+      "password": "Palavra-passe",
+      "entrar": "Entrar",
+      "aEntrar": "A entrar…",
+      "credenciaisInvalidas": "Email ou palavra-passe incorretos.",
+      "semPermissoes": "Esta conta não tem permissões de staff.",
+      "nota": "As contas de staff são criadas pela administração."
+    }
   },
   "Admin": {
     "title": "Área de Administração",

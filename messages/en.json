@@ -2,7 +2,8 @@
   "Common": {
     "appName": "Paco Restaurante",
     "language": "Language",
-    "loading": "Loading…"
+    "loading": "Loading…",
+    "sair": "Sign out"
   },
   "Home": {
     "title": "Paco Restaurante",
@@ -26,7 +27,41 @@
   "Cliente": {
     "title": "Customer Area",
     "description": "Here you'll be able to browse the menu, book a table and place orders.",
-    "verMenu": "View the menu"
+    "verMenu": "View the menu",
+    "oMeuPerfil": "My profile",
+    "entrarRegistar": "Sign in / Register"
+  },
+  "ClienteAuth": {
+    "login": "Sign in",
+    "registo": "Create account",
+    "nome": "Name",
+    "email": "Email",
+    "password": "Password",
+    "entrar": "Sign in",
+    "criarConta": "Create account",
+    "aProcessar": "Processing…",
+    "credenciaisInvalidas": "Wrong email or password.",
+    "confirmaEmailTitle": "Confirm your email",
+    "confirmaEmail": "We've sent a confirmation link to {email}. Open it to activate your account."
+  },
+  "Perfil": {
+    "ola": "Hi, {nome}!",
+    "clienteFiel": "Loyal customer",
+    "mesaHabitual": "Your usual table: {numero}",
+    "mesa": "Table {numero}",
+    "osTeusDados": "Your details",
+    "historico": "Your visits",
+    "semHistorico": "No orders yet. See you soon!",
+    "form": {
+      "nome": "Name",
+      "telefone": "Phone",
+      "newsletter": "I'd like to receive news and offers by email",
+      "newsletterNota": "You can unsubscribe at any time.",
+      "guardar": "Save",
+      "aGuardar": "Saving…",
+      "guardado": "Saved",
+      "erro": "We couldn't save your changes. Please try again."
+    }
   },
   "Menu": {
     "title": "Our menu",
@@ -37,6 +72,8 @@
     "mesa": "Table {numero}",
     "bemVindo": "Welcome to Paco!",
     "intro": "Browse the menu and today's specials. Whenever you're ready, call our team — we'll be right there.",
+    "bemVindoPadrinho": "Welcome back, {nome}!",
+    "introPadrinho": "Your table is ready, as always. It's a pleasure to have you again.",
     "campanhas": "Specials & Special Days",
     "menuTitle": "Menu",
     "verSite": "Visit the restaurant website"
@@ -68,6 +105,19 @@
   "Staff": {
     "title": "Staff Area",
     "description": "Here you'll be able to manage orders and floor service."
+  },
+  "StaffPanel": {
+    "sair": "Sign out",
+    "login": {
+      "title": "Staff sign in",
+      "email": "Email",
+      "password": "Password",
+      "entrar": "Sign in",
+      "aEntrar": "Signing in…",
+      "credenciaisInvalidas": "Wrong email or password.",
+      "semPermissoes": "This account has no staff permissions.",
+      "nota": "Staff accounts are created by the administration."
+    }
   },
   "Admin": {
     "title": "Admin Area",

@@ -2,33 +2,10 @@
 
 import { useLocale, useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/routing";
-import { useMesaOrders, type OrderEstado } from "./MesaOrdersProvider";
+import { useMesaOrders } from "./MesaOrdersProvider";
 import { Card } from "@/components/ui";
+import { EstadoBadge } from "@/components/EstadoBadge";
 import { formatPrice } from "@/lib/format";
-import { cn } from "@/lib/utils";
-
-// Estados diferenciados com a paleta do projeto:
-// pendente = terracota, em preparação = ink, servido = verde salva, pago = neutro
-const ESTADO_STYLES: Record<OrderEstado, string> = {
-  pendente: "border-terracotta bg-terracotta/15 text-terracotta-dark",
-  em_preparacao: "border-ink bg-ink/10 text-ink",
-  servido: "border-sage bg-sage/15 text-sage-dark",
-  pago: "border-smoke bg-smoke/10 text-smoke",
-};
-
-function EstadoBadge({ estado }: { estado: OrderEstado }) {
-  const t = useTranslations("Pedido.estado");
-  return (
-    <span
-      className={cn(
-        "rounded-full border px-3 py-1 text-xs font-semibold",
-        ESTADO_STYLES[estado]
-      )}
-    >
-      {t(estado)}
-    </span>
-  );
-}
 
 // Histórico dos pedidos desta mesa/sessão; o estado atualiza em tempo
 // real (Supabase Realtime) quando o staff o muda.
