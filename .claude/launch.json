@@ -5,7 +5,6 @@
       "name": "paco-dev",
       "runtimeExecutable": "npm",
       "runtimeArgs": ["run", "dev"],
-      "cwd": "/Users/andretorraoaddapters/paco-restaurante",
       "port": 3000
     }
   ]

@@ -41,6 +41,30 @@
     "menuTitle": "Menu",
     "verSite": "Visit the restaurant website"
   },
+  "Pedido": {
+    "adicionar": "Add",
+    "mais": "Increase quantity",
+    "menos": "Decrease quantity",
+    "total": "Total",
+    "itens": "{count, plural, =1 {1 item} other {# items}}",
+    "submeter": "Place order",
+    "aEnviar": "Sending…",
+    "enviado": "Order sent to the kitchen!",
+    "erro": "We couldn't send your order. Please try again.",
+    "historico": "Your orders",
+    "oferta": "On the house",
+    "estado": {
+      "pendente": "Pending",
+      "em_preparacao": "In preparation",
+      "servido": "Served",
+      "pago": "Paid"
+    },
+    "chamarStaff": "Call a waiter",
+    "pedirConta": "Ask for the bill",
+    "staffChamado": "We're on our way!",
+    "contaPedida": "The bill is on its way.",
+    "alertaErro": "We couldn't reach the team. Please try again."
+  },
   "Staff": {
     "title": "Staff Area",
     "description": "Here you'll be able to manage orders and floor service."

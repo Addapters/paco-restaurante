@@ -3,16 +3,19 @@ import { useTranslations } from "next-intl";
 import type { Locale } from "@/i18n/routing";
 import type { MenuCategory, MenuItem } from "@/lib/menu";
 import { Card } from "@/components/ui";
+import { AddToCartButton } from "@/components/mesa/AddToCartButton";
+import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
-function formatPrice(preco: number, locale: Locale) {
-  return new Intl.NumberFormat(locale === "pt" ? "pt-PT" : "en-GB", {
-    style: "currency",
-    currency: "EUR",
-  }).format(preco);
-}
-
-function MenuItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
+function MenuItemCard({
+  item,
+  locale,
+  interactive,
+}: {
+  item: MenuItem;
+  locale: Locale;
+  interactive: boolean;
+}) {
   const t = useTranslations("Menu");
   const nome = locale === "pt" ? item.nome_pt : item.nome_en;
   const descricao = locale === "pt" ? item.descricao_pt : item.descricao_en;
@@ -48,6 +51,16 @@ function MenuItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
           </span>
         )}
         <p className="mt-1 text-sm text-smoke">{descricao}</p>
+        {interactive && (
+          <AddToCartButton
+            item={{
+              itemId: item.id,
+              nome_pt: item.nome_pt,
+              nome_en: item.nome_en,
+              preco: item.preco,
+            }}
+          />
+        )}
       </div>
     </Card>
   );
@@ -56,9 +69,11 @@ function MenuItemCard({ item, locale }: { item: MenuItem; locale: Locale }) {
 export function MenuList({
   categories,
   locale,
+  interactive = false,
 }: {
   categories: MenuCategory[];
   locale: Locale;
+  interactive?: boolean;
 }) {
   return (
     <div className="space-y-10">
@@ -69,7 +84,12 @@ export function MenuList({
           </h3>
           <div className="grid gap-4 md:grid-cols-2">
             {cat.menu_items.map((item) => (
-              <MenuItemCard key={item.id} item={item} locale={locale} />
+              <MenuItemCard
+                key={item.id}
+                item={item}
+                locale={locale}
+                interactive={interactive}
+              />
             ))}
           </div>
         </section>

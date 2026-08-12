@@ -41,6 +41,30 @@
     "menuTitle": "Menu",
     "verSite": "Visitar o site do restaurante"
   },
+  "Pedido": {
+    "adicionar": "Adicionar",
+    "mais": "Aumentar quantidade",
+    "menos": "Diminuir quantidade",
+    "total": "Total",
+    "itens": "{count, plural, =1 {1 item} other {# itens}}",
+    "submeter": "Enviar pedido",
+    "aEnviar": "A enviar…",
+    "enviado": "Pedido enviado para a cozinha!",
+    "erro": "Não foi possível enviar o pedido. Tenta novamente.",
+    "historico": "Os teus pedidos",
+    "oferta": "Oferta",
+    "estado": {
+      "pendente": "Pendente",
+      "em_preparacao": "Em preparação",
+      "servido": "Servido",
+      "pago": "Pago"
+    },
+    "chamarStaff": "Chamar colaborador",
+    "pedirConta": "Pedir a conta",
+    "staffChamado": "Já vamos aí!",
+    "contaPedida": "A conta está a caminho.",
+    "alertaErro": "Não foi possível avisar a equipa. Tenta novamente."
+  },
   "Staff": {
     "title": "Área de Staff",
     "description": "Aqui vais poder gerir pedidos e o serviço de sala."

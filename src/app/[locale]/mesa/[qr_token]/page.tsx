@@ -6,6 +6,10 @@ import { getMenu } from "@/lib/menu";
 import { MenuList } from "@/components/menu/MenuList";
 import { MesaSession } from "@/components/mesa/MesaSession";
 import { CampaignsSection } from "@/components/mesa/CampaignsSection";
+import { MesaOrdersProvider } from "@/components/mesa/MesaOrdersProvider";
+import { TableActions } from "@/components/mesa/TableActions";
+import { OrdersHistory } from "@/components/mesa/OrdersHistory";
+import { CartBar } from "@/components/mesa/CartBar";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 
 const UUID_RE =
@@ -45,7 +49,10 @@ export default async function MesaPage({
   ]);
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <MesaOrdersProvider
+      mesa={{ id: mesa.id, numero: mesa.numero, qrToken: qr_token }}
+    >
+    <div className="flex min-h-screen flex-col pb-24">
       <MesaSession
         mesa={{ id: mesa.id, numero: mesa.numero, qrToken: qr_token }}
       />
@@ -68,11 +75,15 @@ export default async function MesaPage({
           <p className="mt-2 text-smoke">{t("intro")}</p>
         </div>
 
+        <TableActions />
+
+        <OrdersHistory />
+
         <CampaignsSection locale={locale} />
 
         <section>
           <h2 className="mb-6 text-xl font-bold text-ink">{t("menuTitle")}</h2>
-          <MenuList categories={categories} locale={locale} />
+          <MenuList categories={categories} locale={locale} interactive />
         </section>
       </main>
 
@@ -88,6 +99,9 @@ export default async function MesaPage({
           </a>
         </div>
       </footer>
+
+      <CartBar />
     </div>
+    </MesaOrdersProvider>
   );
 }
