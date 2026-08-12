@@ -29,12 +29,12 @@ export default async function StaffPage() {
         <div className="flex items-center gap-2">
           <Link href="/staff/reservas">
             <Button variant="outline" size="sm">
-              🗓 {tStaff("reservas.title")}
+              {tStaff("reservas.title")}
             </Button>
           </Link>
           <Link href="/staff/fecho">
             <Button variant="outline" size="sm">
-              💶 {t("title")}
+              {t("title")}
             </Button>
           </Link>
           <SignOutButton redirectTo="/login-staff" />

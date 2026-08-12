@@ -83,7 +83,6 @@ export function CampaignsManager() {
       titulo_en: draft.titulo_en,
       descricao_pt: draft.descricao_pt,
       descricao_en: draft.descricao_en,
-      emoji: draft.emoji || null,
       imagem_url: draft.imagem_url || null,
       valido_de: draft.valido_de || null,
       valido_ate: draft.valido_ate || null,
@@ -122,9 +121,6 @@ export function CampaignsManager() {
         <input placeholder={t("campos.descricaoEn")} className={inputClass}
           value={draft.descricao_en}
           onChange={(e) => setDraft((d) => ({ ...d, descricao_en: e.target.value }))} />
-        <input placeholder={t("campos.emoji")} className={inputClass}
-          value={draft.emoji}
-          onChange={(e) => setDraft((d) => ({ ...d, emoji: e.target.value }))} />
         <input placeholder={t("campos.imagem")} className={inputClass}
           value={draft.imagem_url}
           onChange={(e) => setDraft((d) => ({ ...d, imagem_url: e.target.value }))} />
@@ -169,10 +165,7 @@ export function CampaignsManager() {
       {campanhas.map((c) => (
         <Card key={c.id} className={cn(!c.ativo && "opacity-60")}>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <CardTitle>
-              {c.emoji && <span className="mr-2">{c.emoji}</span>}
-              {c.titulo_pt}
-            </CardTitle>
+            <CardTitle>{c.titulo_pt}</CardTitle>
             <div className="flex gap-1">
               <Button
                 size="sm"
@@ -200,7 +193,7 @@ export function CampaignsManager() {
                   }
                 }}
               >
-                🗑
+                {t("apagar")}
               </Button>
             </div>
           </div>

@@ -169,7 +169,7 @@ export default async function AdminPage({
 
       <section>
         <Card className="border-sage/50 bg-sage/5">
-          <CardTitle>✨ {t("pacoAi.title")}</CardTitle>
+          <CardTitle>{t("pacoAi.title")}</CardTitle>
           <p className="mt-1 text-xs text-smoke">{t("pacoAi.subtitle")}</p>
           <ul className="mt-4 space-y-2">
             {resumo.destaques.map((d, i) => (
@@ -187,9 +187,6 @@ export default async function AdminPage({
                   )[d.tipo]
                 )}
               >
-                <span aria-hidden="true">
-                  {{ alerta: "⚠️", aviso: "❗", positivo: "📈", info: "ℹ️" }[d.tipo]}
-                </span>
                 {d.texto}
               </li>
             ))}

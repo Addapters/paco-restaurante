@@ -54,7 +54,6 @@ export async function CampaignsSection({ locale }: { locale: Locale }) {
               </div>
             )}
             <div className="p-4">
-              {c.emoji && <div className="text-2xl">{c.emoji}</div>}
               <h3 className="mt-2 font-semibold text-ink">
                 {locale === "pt" ? c.titulo_pt : c.titulo_en}
               </h3>

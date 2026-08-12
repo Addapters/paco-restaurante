@@ -209,7 +209,7 @@ export function MenuManager() {
                   }
                 }}
               >
-                🗑
+                {t("apagar")}
               </Button>
             </div>
           </div>
@@ -285,7 +285,7 @@ export function MenuManager() {
                         }
                       }}
                     >
-                      🗑
+                      {t("apagar")}
                     </Button>
                   </div>
                 </div>

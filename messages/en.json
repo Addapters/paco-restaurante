@@ -128,7 +128,8 @@
       "lugarN": "Seat {n}",
       "oTeuLugar": "your seat",
       "semItens": "No orders yet.",
-      "semLugar": "No seat assigned"
+      "semLugar": "No seat assigned",
+      "oferta": "on the house"
     },
     "upsell": {
       "titulo": "How about adding…",
@@ -192,7 +193,7 @@
       "placeholder": "your@email.com",
       "subscrever": "Subscribe",
       "ok": "Subscription saved. Thank you!",
-      "duplicado": "That email is already subscribed. 👌",
+      "duplicado": "That email is already subscribed.",
       "erro": "We couldn't subscribe you. Please try again."
     }
   },
@@ -284,12 +285,13 @@
         "adicionarItem": "Add item",
         "criarPedido": "Create order (seat {n})",
         "aCriar": "Creating…",
-        "erroCriar": "We couldn't create the order."
+        "erroCriar": "We couldn't create the order.",
+        "oferta": "on the house"
       }
     },
     "alertas": {
       "title": "Alerts",
-      "semAlertas": "No pending alerts. All quiet on the floor. 🍷",
+      "semAlertas": "No pending alerts. All quiet on the floor.",
       "chamar_staff": "call a waiter",
       "pedir_conta": "asking for the bill",
       "atendido": "Handled"
@@ -339,7 +341,8 @@
     "ofertas": {
       "marcar": "Mark as on the house",
       "desmarcar": "Remove offer",
-      "motivo": "Reason (e.g. birthday)"
+      "motivo": "Reason (e.g. birthday)",
+      "rotulo": "On the house"
     },
     "pagamento": {
       "title": "Payment — Table {mesa}",
@@ -449,7 +452,8 @@
         "descricaoEn": "Description (EN)",
         "preco": "Price (€)",
         "foto": "Photo URL"
-      }
+      },
+      "apagar": "Delete"
     },
     "campanhas": {
       "nova": "New special",
@@ -465,11 +469,11 @@
         "tituloEn": "Title (EN)",
         "descricaoPt": "Description (PT)",
         "descricaoEn": "Description (EN)",
-        "emoji": "Emoji (e.g. 🐟)",
         "imagem": "Image URL",
         "validoDe": "Valid from",
         "validoAte": "Valid until"
-      }
+      },
+      "apagar": "Delete"
     },
     "mesas": {
       "novaMesa": "New table",
@@ -484,7 +488,8 @@
       "associarPadrinho": "Link loyal customer",
       "escolherCliente": "Choose a customer…",
       "desassociar": "Unlink",
-      "erro": "We couldn't save the change."
+      "erro": "We couldn't save the change.",
+      "apagar": "Delete"
     }
   }
 }

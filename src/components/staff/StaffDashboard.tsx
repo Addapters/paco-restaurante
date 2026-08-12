@@ -418,8 +418,7 @@ export function StaffDashboard() {
               >
                 <div>
                   <p className="font-semibold text-ink">
-                    {alerta.tipo === "chamar_staff" ? "🛎" : "🧾"}{" "}
-                    {t("mesas.mesa", {
+                                        {t("mesas.mesa", {
                       numero: numeroDaMesa.get(alerta.mesa_id) ?? "?",
                     })}{" "}
                     — {t(`alertas.${alerta.tipo}`)}
@@ -530,7 +529,7 @@ export function StaffDashboard() {
                                 ) : (
                                   estado !== "pago" && (
                                     <button
-                                      className="shrink-0 text-sm opacity-50 hover:opacity-100"
+                                      className="shrink-0 text-xs font-medium text-sage-dark opacity-60 underline-offset-2 hover:opacity-100 hover:underline"
                                       title={t("ofertas.marcar")}
                                       onClick={() => {
                                         setOfertaDe({
@@ -540,14 +539,14 @@ export function StaffDashboard() {
                                         setMotivoOferta("");
                                       }}
                                     >
-                                      🎁
+                                      {t("ofertas.rotulo")}
                                     </button>
                                   )
                                 )}
                               </div>
                               {item.e_oferta && item.motivo_oferta && (
                                 <p className="text-xs text-smoke">
-                                  🎁 {item.motivo_oferta}
+                                  {t("ofertas.rotulo")}: {item.motivo_oferta}
                                 </p>
                               )}
                               {emEdicao && (
@@ -611,11 +610,11 @@ export function StaffDashboard() {
                                 target="_blank"
                                 className="text-xs font-medium text-sage-dark underline-offset-2 hover:underline"
                               >
-                                🧾 {inv.numero_fatura}
+                                {inv.numero_fatura}
                               </Link>
                             ) : (
                               <span className="text-xs text-smoke">
-                                🧾 {inv.numero_fatura}
+                                {inv.numero_fatura}
                               </span>
                             );
                           })()}

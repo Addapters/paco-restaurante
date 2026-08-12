@@ -145,7 +145,7 @@ export function MesaDetailPanel({
               variant="secondary"
               onClick={() => onAtribuir(mesa.id, true)}
             >
-              ✋ {t("assumir")}
+              {t("assumir")}
             </Button>
           )}
           <Button size="sm" variant="ghost" onClick={onFechar} aria-label={t("fechar")}>
@@ -179,7 +179,11 @@ export function MesaDetailPanel({
                             ? item.menu_items.nome_pt
                             : item.menu_items.nome_en
                           : "—"}
-                        {item.e_oferta && " 🎁"}
+                        {item.e_oferta && (
+                          <span className="ml-1 text-xs text-sage-dark">
+                            ({t("oferta")})
+                          </span>
+                        )}
                       </span>
                       <span className="flex items-center gap-1.5">
                         <EstadoBadge estado={order.estado} />

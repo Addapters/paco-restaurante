@@ -128,7 +128,8 @@
       "lugarN": "Lugar {n}",
       "oTeuLugar": "o teu lugar",
       "semItens": "Sem pedidos.",
-      "semLugar": "Sem lugar atribuído"
+      "semLugar": "Sem lugar atribuído",
+      "oferta": "oferta"
     },
     "upsell": {
       "titulo": "Que tal juntar…",
@@ -192,7 +193,7 @@
       "placeholder": "o-teu@email.pt",
       "subscrever": "Subscrever",
       "ok": "Subscrição registada. Obrigado!",
-      "duplicado": "Esse email já está subscrito. 👌",
+      "duplicado": "Esse email já está subscrito.",
       "erro": "Não foi possível subscrever. Tenta novamente."
     }
   },
@@ -284,12 +285,13 @@
         "adicionarItem": "Adicionar item",
         "criarPedido": "Criar pedido (lugar {n})",
         "aCriar": "A criar…",
-        "erroCriar": "Não foi possível criar o pedido."
+        "erroCriar": "Não foi possível criar o pedido.",
+        "oferta": "oferta"
       }
     },
     "alertas": {
       "title": "Alertas",
-      "semAlertas": "Sem alertas pendentes. Tudo tranquilo na sala. 🍷",
+      "semAlertas": "Sem alertas pendentes. Tudo tranquilo na sala.",
       "chamar_staff": "chamar colaborador",
       "pedir_conta": "pedir a conta",
       "atendido": "Atendido"
@@ -339,7 +341,8 @@
     "ofertas": {
       "marcar": "Marcar como oferta",
       "desmarcar": "Remover oferta",
-      "motivo": "Motivo da oferta (ex.: aniversário)"
+      "motivo": "Motivo da oferta (ex.: aniversário)",
+      "rotulo": "Oferta"
     },
     "pagamento": {
       "title": "Pagamento — Mesa {mesa}",
@@ -449,7 +452,8 @@
         "descricaoEn": "Descrição (EN)",
         "preco": "Preço (€)",
         "foto": "URL da foto"
-      }
+      },
+      "apagar": "Apagar"
     },
     "campanhas": {
       "nova": "Nova campanha",
@@ -465,11 +469,11 @@
         "tituloEn": "Título (EN)",
         "descricaoPt": "Descrição (PT)",
         "descricaoEn": "Descrição (EN)",
-        "emoji": "Emoji (ex.: 🐟)",
         "imagem": "URL da imagem",
         "validoDe": "Válida de",
         "validoAte": "Válida até"
-      }
+      },
+      "apagar": "Apagar"
     },
     "mesas": {
       "novaMesa": "Nova mesa",
@@ -484,7 +488,8 @@
       "associarPadrinho": "Associar cliente fiel",
       "escolherCliente": "Escolher cliente…",
       "desassociar": "Desassociar",
-      "erro": "Não foi possível guardar a alteração."
+      "erro": "Não foi possível guardar a alteração.",
+      "apagar": "Apagar"
     }
   }
 }

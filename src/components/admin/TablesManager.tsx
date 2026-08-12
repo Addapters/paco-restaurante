@@ -166,7 +166,7 @@ export function TablesManager() {
               <CardTitle>{t("mesa", { numero: mesa.numero })}</CardTitle>
               <div className="flex gap-1">
                 <Button size="sm" variant="secondary" onClick={() => descarregarQr(mesa)}>
-                  ⬇ {t("descarregarQr")}
+                  {t("descarregarQr")}
                 </Button>
                 <Button size="sm" variant="ghost" title={t("regenerarQr")}
                   onClick={() => regenerarToken(mesa)}>
@@ -183,7 +183,7 @@ export function TablesManager() {
                     }
                   }}
                 >
-                  🗑
+                  {t("apagar")}
                 </Button>
               </div>
             </div>

@@ -109,7 +109,11 @@ export function MesaSeatsView() {
                       <span className="min-w-0 flex-1 truncate">
                         {item.quantidade}×{" "}
                         {locale === "pt" ? item.nome_pt : item.nome_en}
-                        {item.e_oferta && " 🎁"}
+                        {item.e_oferta && (
+                          <span className="ml-1 text-xs text-sage-dark">
+                            ({t("oferta")})
+                          </span>
+                        )}
                       </span>
                       <EstadoBadge estado={item.estado} />
                     </li>

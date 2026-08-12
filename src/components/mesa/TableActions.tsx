@@ -39,7 +39,7 @@ export function TableActions() {
           disabled={busy === "chamar_staff" || sent.chamar_staff}
           onClick={() => handle("chamar_staff")}
         >
-          {sent.chamar_staff ? `✓ ${t("staffChamado")}` : `🛎 ${t("chamarStaff")}`}
+          {sent.chamar_staff ? `✓ ${t("staffChamado")}` : t("chamarStaff")}
         </Button>
         <Button
           variant="outline"
@@ -47,7 +47,7 @@ export function TableActions() {
           disabled={busy === "pedir_conta" || sent.pedir_conta}
           onClick={() => handle("pedir_conta")}
         >
-          {sent.pedir_conta ? `✓ ${t("contaPedida")}` : `🧾 ${t("pedirConta")}`}
+          {sent.pedir_conta ? `✓ ${t("contaPedida")}` : t("pedirConta")}
         </Button>
       </div>
       {error && (

@@ -12,9 +12,9 @@ export async function SiteFooter() {
   ]);
 
   const ligacoes = [
-    { href: settings.google_reviews_url, label: `⭐ ${t("googleReviews")}` },
-    { href: settings.instagram_url, label: "📷 Instagram" },
-    { href: settings.facebook_url, label: "📘 Facebook" },
+    { href: settings.google_reviews_url, label: `${t("googleReviews")}` },
+    { href: settings.instagram_url, label: "Instagram" },
+    { href: settings.facebook_url, label: "Facebook" },
   ].filter((l) => l.href);
 
   return (
@@ -43,7 +43,7 @@ export async function SiteFooter() {
                 href="/reservas"
                 className="text-sm text-sage-dark underline-offset-4 hover:underline"
               >
-                🗓 {t("reservar")}
+                {t("reservar")}
               </Link>
             </li>
           </ul>

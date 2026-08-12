@@ -101,7 +101,7 @@ export function CartBar({ categories = [] }: { categories?: MenuCategory[] }) {
             {sugestoes.length > 0 && (
               <div className="border-b border-ink/10 px-5 py-3">
                 <p className="text-xs font-semibold text-sage-dark">
-                  ✨ {t("upsell.titulo")}
+                  {t("upsell.titulo")}
                 </p>
                 <div className="mt-2 flex flex-wrap gap-2">
                   {sugestoes.map(({ item, motivo }) => (

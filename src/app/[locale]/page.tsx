@@ -133,11 +133,11 @@ export default async function HomePage({
             <Card>
               <ul className="space-y-3 text-sm text-ink">
                 <li>
-                  <span className="font-semibold">📍 {t("contacto.morada")}: </span>
+                  <span className="font-semibold">{t("contacto.morada")}: </span>
                   {t("contacto.moradaPlaceholder")}
                 </li>
                 <li>
-                  <span className="font-semibold">🕐 {t("contacto.horario")}: </span>
+                  <span className="font-semibold">{t("contacto.horario")}: </span>
                   {t("contacto.horarioPlaceholder")}
                 </li>
                 <li className="flex gap-4 pt-2">
@@ -147,7 +147,7 @@ export default async function HomePage({
                     rel="noopener noreferrer"
                     className="font-medium text-sage-dark underline-offset-4 hover:underline"
                   >
-                    📷 Instagram
+                    Instagram
                   </a>
                   <a
                     href={facebook}
@@ -155,13 +155,13 @@ export default async function HomePage({
                     rel="noopener noreferrer"
                     className="font-medium text-sage-dark underline-offset-4 hover:underline"
                   >
-                    📘 Facebook
+                    Facebook
                   </a>
                 </li>
               </ul>
             </Card>
             <Card className="flex min-h-48 items-center justify-center border-dashed">
-              <p className="text-sm text-smoke">🗺 {t("contacto.mapa")}</p>
+              <p className="text-sm text-smoke">{t("contacto.mapa")}</p>
             </Card>
           </div>
         </section>
