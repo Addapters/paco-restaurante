@@ -256,5 +256,91 @@
   "Admin": {
     "title": "Área de Administração",
     "description": "Aqui vais poder gerir o menu, a equipa e as definições do restaurante."
+  },
+  "AdminArea": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "menu": "Menu",
+      "campanhas": "Campanhas",
+      "mesas": "Mesas"
+    },
+    "dashboard": {
+      "faturacaoMensal": "Faturação mensal",
+      "ultimos12Meses": "últimos 12 meses",
+      "maisVendidos": "Pratos mais vendidos",
+      "pedidosPorOrigem": "Pedidos por origem",
+      "origens": {
+        "mesa": "Mesa",
+        "uber_informativo": "Uber Eats",
+        "thefork_informativo": "TheFork",
+        "outro": "Outro"
+      },
+      "satisfacao": "Satisfação dos clientes",
+      "nRespostas": "{count, plural, =1 {1 resposta} other {# respostas}}",
+      "comentariosPrivados": "Últimas mensagens privadas",
+      "fechos": "Fechos de caixa/cofre recentes",
+      "data": "Data",
+      "caixa": "Caixa",
+      "cofre": "Cofre",
+      "diferenca": "Diferença",
+      "semDados": "Ainda não há dados suficientes."
+    },
+    "menu": {
+      "novoItem": "Item",
+      "novaCategoria": "Nova categoria",
+      "criar": "Criar",
+      "guardar": "Guardar",
+      "cancelar": "Cancelar",
+      "ativo": "Disponível",
+      "inativo": "Indisponível",
+      "disponivel": "Alternar disponibilidade",
+      "destaque": "Destaque",
+      "confirmarApagarItem": "Apagar este item do menu?",
+      "confirmarApagarCategoria": "Apagar esta categoria e todos os seus itens?",
+      "erro": "Não foi possível guardar a alteração.",
+      "campos": {
+        "nomePt": "Nome (PT)",
+        "nomeEn": "Nome (EN)",
+        "descricaoPt": "Descrição (PT)",
+        "descricaoEn": "Descrição (EN)",
+        "preco": "Preço (€)",
+        "foto": "URL da foto"
+      }
+    },
+    "campanhas": {
+      "nova": "Nova campanha",
+      "guardar": "Guardar",
+      "cancelar": "Cancelar",
+      "ativa": "Ativa",
+      "inativa": "Inativa",
+      "validade": "Válida de {de} até {ate}",
+      "confirmarApagar": "Apagar esta campanha?",
+      "erro": "Não foi possível guardar a alteração.",
+      "campos": {
+        "tituloPt": "Título (PT)",
+        "tituloEn": "Título (EN)",
+        "descricaoPt": "Descrição (PT)",
+        "descricaoEn": "Descrição (EN)",
+        "emoji": "Emoji (ex.: 🐟)",
+        "imagem": "URL da imagem",
+        "validoDe": "Válida de",
+        "validoAte": "Válida até"
+      }
+    },
+    "mesas": {
+      "novaMesa": "Nova mesa",
+      "numero": "Número",
+      "criar": "Criar",
+      "mesa": "Mesa {numero}",
+      "descarregarQr": "QR (PNG)",
+      "regenerarQr": "Regenerar QR token",
+      "confirmarRegenerar": "Regenerar o token invalida o QR impresso desta mesa. Continuar?",
+      "confirmarApagar": "Apagar esta mesa?",
+      "apadrinhadaPor": "Apadrinhada por",
+      "associarPadrinho": "Associar cliente fiel",
+      "escolherCliente": "Escolher cliente…",
+      "desassociar": "Desassociar",
+      "erro": "Não foi possível guardar a alteração."
+    }
   }
 }

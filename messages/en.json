@@ -256,5 +256,91 @@
   "Admin": {
     "title": "Admin Area",
     "description": "Here you'll be able to manage the menu, the team and restaurant settings."
+  },
+  "AdminArea": {
+    "nav": {
+      "dashboard": "Dashboard",
+      "menu": "Menu",
+      "campanhas": "Specials",
+      "mesas": "Tables"
+    },
+    "dashboard": {
+      "faturacaoMensal": "Monthly revenue",
+      "ultimos12Meses": "last 12 months",
+      "maisVendidos": "Best-selling dishes",
+      "pedidosPorOrigem": "Orders by source",
+      "origens": {
+        "mesa": "Table",
+        "uber_informativo": "Uber Eats",
+        "thefork_informativo": "TheFork",
+        "outro": "Other"
+      },
+      "satisfacao": "Customer satisfaction",
+      "nRespostas": "{count, plural, =1 {1 answer} other {# answers}}",
+      "comentariosPrivados": "Latest private messages",
+      "fechos": "Recent cash closures",
+      "data": "Date",
+      "caixa": "Drawer",
+      "cofre": "Safe",
+      "diferenca": "Difference",
+      "semDados": "Not enough data yet."
+    },
+    "menu": {
+      "novoItem": "Item",
+      "novaCategoria": "New category",
+      "criar": "Create",
+      "guardar": "Save",
+      "cancelar": "Cancel",
+      "ativo": "Available",
+      "inativo": "Unavailable",
+      "disponivel": "Toggle availability",
+      "destaque": "Highlight",
+      "confirmarApagarItem": "Delete this menu item?",
+      "confirmarApagarCategoria": "Delete this category and all its items?",
+      "erro": "We couldn't save the change.",
+      "campos": {
+        "nomePt": "Name (PT)",
+        "nomeEn": "Name (EN)",
+        "descricaoPt": "Description (PT)",
+        "descricaoEn": "Description (EN)",
+        "preco": "Price (€)",
+        "foto": "Photo URL"
+      }
+    },
+    "campanhas": {
+      "nova": "New special",
+      "guardar": "Save",
+      "cancelar": "Cancel",
+      "ativa": "Active",
+      "inativa": "Inactive",
+      "validade": "Valid from {de} until {ate}",
+      "confirmarApagar": "Delete this special?",
+      "erro": "We couldn't save the change.",
+      "campos": {
+        "tituloPt": "Title (PT)",
+        "tituloEn": "Title (EN)",
+        "descricaoPt": "Description (PT)",
+        "descricaoEn": "Description (EN)",
+        "emoji": "Emoji (e.g. 🐟)",
+        "imagem": "Image URL",
+        "validoDe": "Valid from",
+        "validoAte": "Valid until"
+      }
+    },
+    "mesas": {
+      "novaMesa": "New table",
+      "numero": "Number",
+      "criar": "Create",
+      "mesa": "Table {numero}",
+      "descarregarQr": "QR (PNG)",
+      "regenerarQr": "Regenerate QR token",
+      "confirmarRegenerar": "Regenerating the token invalidates this table's printed QR. Continue?",
+      "confirmarApagar": "Delete this table?",
+      "apadrinhadaPor": "Sponsored by",
+      "associarPadrinho": "Link loyal customer",
+      "escolherCliente": "Choose a customer…",
+      "desassociar": "Unlink",
+      "erro": "We couldn't save the change."
+    }
   }
 }
