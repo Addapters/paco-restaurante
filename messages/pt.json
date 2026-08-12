@@ -129,6 +129,50 @@
   },
   "StaffPanel": {
     "sair": "Sair",
+    "mesas": {
+      "title": "Mesas",
+      "mesa": "Mesa {numero}",
+      "livre": "Livre",
+      "ocupada": "Ocupada",
+      "alerta": "Alerta!"
+    },
+    "alertas": {
+      "title": "Alertas",
+      "semAlertas": "Sem alertas pendentes. Tudo tranquilo na sala. 🍷",
+      "chamar_staff": "chamar colaborador",
+      "pedir_conta": "pedir a conta",
+      "atendido": "Atendido"
+    },
+    "novoPedido": {
+      "title": "Novo pedido",
+      "origem": "Origem",
+      "origens": {
+        "mesa": "Mesa (sala)",
+        "uber_informativo": "Uber Eats (informativo)",
+        "thefork_informativo": "TheFork (informativo)",
+        "outro": "Outro"
+      },
+      "mesa": "Mesa",
+      "opcional": "opcional",
+      "itens": "Itens",
+      "escolherItem": "Escolher item…",
+      "quantidade": "Quantidade",
+      "removerItem": "Remover item",
+      "adicionarItem": "Adicionar item",
+      "total": "Total",
+      "criar": "Criar pedido",
+      "aCriar": "A criar…",
+      "criado": "Pedido criado",
+      "erroCriar": "Não foi possível criar o pedido."
+    },
+    "pedidos": {
+      "title": "Pedidos",
+      "acao": {
+        "em_preparacao": "Preparar",
+        "servido": "Servir",
+        "pago": "Registar pago"
+      }
+    },
     "login": {
       "title": "Entrar na área de staff",
       "email": "Email",

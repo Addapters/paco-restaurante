@@ -129,6 +129,50 @@
   },
   "StaffPanel": {
     "sair": "Sign out",
+    "mesas": {
+      "title": "Tables",
+      "mesa": "Table {numero}",
+      "livre": "Free",
+      "ocupada": "Occupied",
+      "alerta": "Alert!"
+    },
+    "alertas": {
+      "title": "Alerts",
+      "semAlertas": "No pending alerts. All quiet on the floor. 🍷",
+      "chamar_staff": "call a waiter",
+      "pedir_conta": "asking for the bill",
+      "atendido": "Handled"
+    },
+    "novoPedido": {
+      "title": "New order",
+      "origem": "Source",
+      "origens": {
+        "mesa": "Table (floor)",
+        "uber_informativo": "Uber Eats (informative)",
+        "thefork_informativo": "TheFork (informative)",
+        "outro": "Other"
+      },
+      "mesa": "Table",
+      "opcional": "optional",
+      "itens": "Items",
+      "escolherItem": "Choose an item…",
+      "quantidade": "Quantity",
+      "removerItem": "Remove item",
+      "adicionarItem": "Add item",
+      "total": "Total",
+      "criar": "Create order",
+      "aCriar": "Creating…",
+      "criado": "Order created",
+      "erroCriar": "We couldn't create the order."
+    },
+    "pedidos": {
+      "title": "Orders",
+      "acao": {
+        "em_preparacao": "Prepare",
+        "servido": "Serve",
+        "pago": "Mark paid"
+      }
+    },
     "login": {
       "title": "Staff sign in",
       "email": "Email",
