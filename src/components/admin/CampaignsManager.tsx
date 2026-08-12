@@ -46,7 +46,9 @@ export function CampaignsManager() {
   }, [supabase]);
 
   useEffect(() => {
-    carregar();
+    // Fetch-on-mount legítimo: o setState acontece após o await
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void carregar();
   }, [carregar]);
 
   async function executar(promessa: PromiseLike<{ error: unknown }>) {
@@ -100,7 +102,9 @@ export function CampaignsManager() {
   const inputClass =
     "h-9 w-full rounded-lg border border-ink/20 bg-paper px-2 text-sm text-ink placeholder:text-smoke focus:border-terracotta focus:outline-none";
 
-  function Formulario({ id }: { id?: string }) {
+  // Função de render (não componente): mantém a identidade da árvore e o
+  // foco dos inputs entre re-renders do estado draft
+  function renderFormulario(id?: string) {
     return (
       <form
         onSubmit={(e) => gravar(e, id)}
@@ -158,7 +162,7 @@ export function CampaignsManager() {
       {form === "nova" && (
         <Card>
           <CardTitle>{t("nova")}</CardTitle>
-          <Formulario />
+          {renderFormulario()}
         </Card>
       )}
 
@@ -209,7 +213,7 @@ export function CampaignsManager() {
               })}
             </p>
           )}
-          {form === c.id && <Formulario id={c.id} />}
+          {form === c.id && renderFormulario(c.id)}
         </Card>
       ))}
     </div>

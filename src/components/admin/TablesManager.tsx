@@ -49,7 +49,9 @@ export function TablesManager() {
   }, [supabase]);
 
   useEffect(() => {
-    carregar();
+    // Fetch-on-mount legítimo: o setState acontece após o await
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void carregar();
   }, [carregar]);
 
   const nomeDoCliente = useMemo(

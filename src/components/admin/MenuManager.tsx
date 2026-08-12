@@ -78,7 +78,9 @@ export function MenuManager() {
   }, [supabase]);
 
   useEffect(() => {
-    carregar();
+    // Fetch-on-mount legítimo: o setState acontece após o await
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void carregar();
   }, [carregar]);
 
   async function executar(promessa: PromiseLike<{ error: unknown }>) {
@@ -136,7 +138,9 @@ export function MenuManager() {
   const inputClass =
     "h-9 w-full rounded-lg border border-ink/20 bg-paper px-2 text-sm text-ink placeholder:text-smoke focus:border-terracotta focus:outline-none";
 
-  function FormItem({ categoriaId, itemId }: { categoriaId: string; itemId?: string }) {
+  // Função de render (não componente): mantém a identidade da árvore e o
+  // foco dos inputs entre re-renders do estado draft
+  function renderFormItem(categoriaId: string, itemId?: string) {
     return (
       <form
         onSubmit={(e) => gravarItem(e, categoriaId, itemId)}
@@ -210,7 +214,7 @@ export function MenuManager() {
             </div>
           </div>
 
-          {itemForm === `nova:${cat.id}` && <FormItem categoriaId={cat.id} />}
+          {itemForm === `nova:${cat.id}` && renderFormItem(cat.id)}
 
           <ul className="mt-4 divide-y divide-ink/5">
             {cat.menu_items.map((item) => (
@@ -285,9 +289,7 @@ export function MenuManager() {
                     </Button>
                   </div>
                 </div>
-                {itemForm === item.id && (
-                  <FormItem categoriaId={cat.id} itemId={item.id} />
-                )}
+                {itemForm === item.id && renderFormItem(cat.id, item.id)}
               </li>
             ))}
           </ul>

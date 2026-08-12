@@ -110,7 +110,9 @@ export function MesaOrdersProvider({
   // Histórico + Realtime: estado dos pedidos atualiza quando o staff muda
   useEffect(() => {
     if (!uid) return;
-    loadOrders(uid);
+    // Fetch-on-mount legítimo: o setState acontece após o await
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void loadOrders(uid);
 
     const channel = supabase
       .channel(`orders-mesa-${mesa.id}`)

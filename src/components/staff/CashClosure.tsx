@@ -109,7 +109,9 @@ export function CashClosure({ isAdmin }: { isAdmin: boolean }) {
   }, [supabase, isAdmin]);
 
   useEffect(() => {
-    carregar();
+    // Fetch-on-mount legítimo: o setState acontece após o await
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    void carregar();
   }, [carregar]);
 
   // O sistema só espera encontrar em caixa/cofre o que foi pago em

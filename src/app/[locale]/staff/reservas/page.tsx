@@ -1,16 +1,9 @@
 import { Link } from "@/i18n/navigation";
-import type { Locale } from "@/i18n/routing";
 import { getTranslations } from "next-intl/server";
-import { requireRole } from "@/lib/auth-guard";
 import { ReservationsManager } from "@/components/staff/ReservationsManager";
 
-export default async function StaffReservasPage({
-  params,
-}: {
-  params: Promise<{ locale: Locale }>;
-}) {
-  const { locale } = await params;
-  await requireRole(locale, ["staff", "admin"]);
+// O acesso é garantido pelo guard no layout de /staff.
+export default async function StaffReservasPage() {
   const t = await getTranslations("Fecho");
 
   return (

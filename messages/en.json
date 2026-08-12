@@ -24,6 +24,27 @@
     },
     "enter": "Enter"
   },
+  "Landing": {
+    "tagline": "Portuguese comfort food, with Paco welcoming you at the door.",
+    "entrar": "Sign in",
+    "verMenu": "See the menu",
+    "reservar": "Book a table",
+    "sobre": {
+      "title": "About Paco",
+      "texto": "[TEXT TO REPLACE] Paco is a family restaurant where the table is always set like at home. We cook the Portuguese classics with seasonal produce, serve with time and care — and the name? It belongs to the house dog, who greets the regulars at the door. Come meet us; the first visit is never the last."
+    },
+    "destaques": {
+      "title": "House suggestions"
+    },
+    "contacto": {
+      "title": "Where we are",
+      "morada": "Address",
+      "moradaPlaceholder": "[ADDRESS TO REPLACE — street, number, postcode, town]",
+      "horario": "Opening hours",
+      "horarioPlaceholder": "[HOURS TO REPLACE — e.g. Tue–Sun, 12–3pm and 7–11pm]",
+      "mapa": "Map to be embedded (Google Maps)"
+    }
+  },
   "Cliente": {
     "title": "Customer Area",
     "description": "Here you'll be able to browse the menu, book a table and place orders.",
@@ -294,14 +315,17 @@
       "fechar": "Close"
     },
     "login": {
-      "title": "Staff sign in",
+      "titles": {
+        "staff": "Staff sign in",
+        "admin": "Admin sign in"
+      },
       "email": "Email",
       "password": "Password",
       "entrar": "Sign in",
       "aEntrar": "Signing in…",
       "credenciaisInvalidas": "Wrong email or password.",
-      "semPermissoes": "This account has no staff permissions.",
-      "nota": "Staff accounts are created by the administration."
+      "acessoNegado": "Access denied: this account has no permissions for this area.",
+      "nota": "Staff and admin accounts are created by the management."
     }
   },
   "Admin": {

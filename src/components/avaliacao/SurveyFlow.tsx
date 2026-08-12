@@ -77,7 +77,7 @@ export function SurveyFlow({
         return;
       }
       setStep("redirecionar");
-      window.location.href = GOOGLE_REVIEWS_URL;
+      window.location.assign(GOOGLE_REVIEWS_URL);
     } else {
       setStep("formulario");
     }

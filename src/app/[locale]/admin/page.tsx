@@ -1,6 +1,5 @@
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
-import { requireRole } from "@/lib/auth-guard";
 import { createClient } from "@/lib/supabase/server";
 import {
   getDailyBriefEngine,
@@ -58,7 +57,6 @@ export default async function AdminPage({
   params: Promise<{ locale: Locale }>;
 }) {
   const { locale } = await params;
-  await requireRole(locale, ["admin"]);
 
   const t = await getTranslations("AdminArea.dashboard");
   const supabase = await createClient();
@@ -166,7 +164,7 @@ export default async function AdminPage({
     <div className="space-y-8">
       <div className="flex items-center justify-between gap-4">
         <AdminNav active="dashboard" />
-        <SignOutButton redirectTo="/staff/login" />
+        <SignOutButton redirectTo="/login-admin" />
       </div>
 
       <section>

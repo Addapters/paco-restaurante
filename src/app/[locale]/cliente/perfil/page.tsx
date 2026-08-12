@@ -35,7 +35,7 @@ export default async function PerfilPage({
   } = await supabase.auth.getUser();
   // Sessões anónimas (QR da mesa) não têm perfil "de cliente habitual"
   if (!user || user.is_anonymous) {
-    redirect({ href: "/cliente/login", locale });
+    redirect({ href: "/login", locale });
   }
 
   const [t, { data: profile }, { data: orders }] = await Promise.all([
@@ -58,7 +58,7 @@ export default async function PerfilPage({
   ]);
 
   if (!profile) {
-    redirect({ href: "/cliente/login", locale });
+    redirect({ href: "/login", locale });
   }
 
   const mesaHabitual = (

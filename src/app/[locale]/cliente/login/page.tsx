@@ -1,5 +1,12 @@
-import { AuthForm } from "@/components/cliente/AuthForm";
+import { redirect } from "@/i18n/navigation";
+import type { Locale } from "@/i18n/routing";
 
-export default function ClienteLoginPage() {
-  return <AuthForm />;
+// Rota antiga — o login de clientes vive agora em /login.
+export default async function ClienteLoginRedirect({
+  params,
+}: {
+  params: Promise<{ locale: Locale }>;
+}) {
+  const { locale } = await params;
+  redirect({ href: "/login", locale });
 }

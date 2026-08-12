@@ -24,6 +24,27 @@
     },
     "enter": "Entrar"
   },
+  "Landing": {
+    "tagline": "Cozinha portuguesa de conforto, com o Paco a dar as boas-vindas.",
+    "entrar": "Entrar",
+    "verMenu": "Ver o menu",
+    "reservar": "Reservar mesa",
+    "sobre": {
+      "title": "Sobre o Paco",
+      "texto": "[TEXTO A SUBSTITUIR] O Paco é um restaurante de família onde a mesa é sempre posta como em casa. Cozinhamos os clássicos portugueses com produto da época, servimos com tempo e gosto, e o nome? É do cão da casa, que recebe os habitués à porta. Vem conhecer-nos — a primeira visita nunca é a última."
+    },
+    "destaques": {
+      "title": "Sugestões da casa"
+    },
+    "contacto": {
+      "title": "Onde estamos",
+      "morada": "Morada",
+      "moradaPlaceholder": "[MORADA A SUBSTITUIR — Rua, nº, código postal, localidade]",
+      "horario": "Horário",
+      "horarioPlaceholder": "[HORÁRIO A SUBSTITUIR — ex.: ter–dom, 12h–15h e 19h–23h]",
+      "mapa": "Mapa a integrar (Google Maps)"
+    }
+  },
   "Cliente": {
     "title": "Área de Cliente",
     "description": "Aqui vais poder ver o menu, reservar mesa e fazer pedidos.",
@@ -294,14 +315,17 @@
       "fechar": "Fechar"
     },
     "login": {
-      "title": "Entrar na área de staff",
+      "titles": {
+        "staff": "Entrar na área de staff",
+        "admin": "Entrar na administração"
+      },
       "email": "Email",
       "password": "Palavra-passe",
       "entrar": "Entrar",
       "aEntrar": "A entrar…",
       "credenciaisInvalidas": "Email ou palavra-passe incorretos.",
-      "semPermissoes": "Esta conta não tem permissões de staff.",
-      "nota": "As contas de staff são criadas pela administração."
+      "acessoNegado": "Acesso negado: esta conta não tem permissões para esta área.",
+      "nota": "As contas de staff e administração são criadas pela gerência."
     }
   },
   "Admin": {

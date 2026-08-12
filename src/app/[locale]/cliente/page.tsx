@@ -21,7 +21,7 @@ export default async function ClientePage() {
         <Link href="/cliente/menu">
           <Button>{t("verMenu")}</Button>
         </Link>
-        <Link href={autenticado ? "/cliente/perfil" : "/cliente/login"}>
+        <Link href={autenticado ? "/cliente/perfil" : "/login"}>
           <Button variant="secondary">
             {autenticado ? t("oMeuPerfil") : t("entrarRegistar")}
           </Button>

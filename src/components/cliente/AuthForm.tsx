@@ -11,7 +11,7 @@ type Mode = "login" | "registo";
 
 // Login e registo self-service de clientes (email + password).
 // Contas de staff/admin nunca passam por aqui — são criadas por convite.
-export function AuthForm() {
+export function AuthForm({ redirectTo = "/cliente" }: { redirectTo?: string }) {
   const t = useTranslations("ClienteAuth");
   const router = useRouter();
   const [mode, setMode] = useState<Mode>("login");
@@ -57,7 +57,7 @@ export function AuthForm() {
       }
     }
 
-    router.replace("/cliente/perfil");
+    router.replace(redirectTo);
     router.refresh();
   }
 
