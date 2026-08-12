@@ -180,7 +180,23 @@
       "aEnviar": "A enviar…",
       "erro": "Não foi possível enviar o pedido. Tenta novamente.",
       "okTitle": "Pedido de reserva enviado!",
-      "okNota": "A tua reserva está pendente — a equipa vai confirmá-la em breve."
+      "okNota": "A tua reserva está pendente — a equipa vai confirmá-la em breve.",
+      "dataLabel": "Data",
+      "horaLabel": "Hora",
+      "contactoLabel": "Os teus dados",
+      "menosPessoas": "Menos pessoas",
+      "maisPessoas": "Mais pessoas",
+      "gruposGrandes": "Para grupos com mais de {maximo} pessoas, contacta-nos diretamente por telefone.",
+      "capacidadeNota": "Disponibilidade aproximada — a equipa confirma o horário exato."
+    },
+    "voltar": "Voltar",
+    "tipoCozinha": "Portuguesa · Grelhados [A REVER]",
+    "localizacao": {
+      "title": "Localização",
+      "morada": "Morada",
+      "moradaPlaceholder": "[MORADA A SUBSTITUIR — Rua, nº, código postal, localidade]",
+      "horarioPlaceholder": "[HORÁRIO A SUBSTITUIR — ex.: ter–dom, 12h–15h e 19h–23h]",
+      "mapaAlt": "Mapa (placeholder)"
     }
   },
   "Footer": {

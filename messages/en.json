@@ -180,7 +180,23 @@
       "aEnviar": "Sending…",
       "erro": "We couldn't send your request. Please try again.",
       "okTitle": "Reservation request sent!",
-      "okNota": "Your reservation is pending — the team will confirm it shortly."
+      "okNota": "Your reservation is pending — the team will confirm it shortly.",
+      "dataLabel": "Date",
+      "horaLabel": "Time",
+      "contactoLabel": "Your details",
+      "menosPessoas": "Fewer people",
+      "maisPessoas": "More people",
+      "gruposGrandes": "For groups larger than {maximo} people, please contact us directly by phone.",
+      "capacidadeNota": "Approximate availability — the team confirms the exact time."
+    },
+    "voltar": "Back",
+    "tipoCozinha": "Portuguese · Grilled dishes [TO REVIEW]",
+    "localizacao": {
+      "title": "Location",
+      "morada": "Address",
+      "moradaPlaceholder": "[ADDRESS TO REPLACE — street, number, postcode, town]",
+      "horarioPlaceholder": "[HOURS TO REPLACE — e.g. Tue–Sun, 12–3pm and 7–11pm]",
+      "mapaAlt": "Map (placeholder)"
     }
   },
   "Footer": {
