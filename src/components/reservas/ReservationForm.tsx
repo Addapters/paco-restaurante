@@ -10,7 +10,11 @@ import { PeopleCounter } from "./PeopleCounter";
 import { gerarHorarios, MAX_PESSOAS } from "@/lib/reservas/horario";
 import type { Locale } from "@/i18n/routing";
 
-const HORARIOS = gerarHorarios();
+function somarUmDia(dataIso: string): string {
+  const d = new Date(`${dataIso}T00:00:00`);
+  d.setDate(d.getDate() + 1);
+  return d.toISOString().slice(0, 10);
+}
 
 // Reserva pública: cria uma linha "pendente" em reservations, que o
 // staff confirma em /staff/reservas. O visitante não precisa de conta
@@ -23,6 +27,7 @@ export function ReservationForm() {
 
   const dias = useMemo(() => gerarDias(locale), [locale]);
   const [data, setData] = useState(dias[0].iso);
+  const horarios = useMemo(() => gerarHorarios(data), [data]);
   const [hora, setHora] = useState<string | null>(null);
   const [pessoas, setPessoas] = useState(2);
   const [nome, setNome] = useState("");
@@ -49,15 +54,26 @@ export function ReservationForm() {
     });
   }, [supabase]);
 
-  // Contagem por horário no dia escolhido (aproximação de capacidade)
+  // Contagem por horário no dia escolhido (aproximação de capacidade).
+  // Sexta/sábado fecham depois da meia-noite: esses slots (ex. 00:30)
+  // ficam guardados com a data do dia seguinte, por isso lê-se também
+  // essa segunda data e junta-se só a madrugada (hora < 12:00).
   const carregarContagens = useCallback(
     async (diaIso: string) => {
-      const { data } = await supabase.rpc("contagem_reservas_por_hora", {
-        p_data: diaIso,
-      });
+      const [{ data: hoje }, { data: amanha }] = await Promise.all([
+        supabase.rpc("contagem_reservas_por_hora", { p_data: diaIso }),
+        supabase.rpc("contagem_reservas_por_hora", {
+          p_data: somarUmDia(diaIso),
+        }),
+      ]);
       const mapa: Record<string, number> = {};
-      for (const row of (data as { hora: string; total: number }[]) ?? []) {
+      for (const row of (hoje as { hora: string; total: number }[]) ?? []) {
         mapa[row.hora] = Number(row.total);
+      }
+      for (const row of (amanha as { hora: string; total: number }[]) ?? []) {
+        if (row.hora < "12:00") {
+          mapa[row.hora] = (mapa[row.hora] ?? 0) + Number(row.total);
+        }
       }
       setContagens(mapa);
     },
@@ -90,9 +106,13 @@ export function ReservationForm() {
       return;
     }
 
+    // Slots de madrugada (ex. 00:30 de sexta para sábado) contam para
+    // a data seguinte à escolhida
+    const dataEfetiva = hora < "12:00" ? somarUmDia(data) : data;
+
     const { error } = await supabase.from("reservations").insert({
       cliente_id: session.user.id,
-      data_hora: new Date(`${data}T${hora}`).toISOString(),
+      data_hora: new Date(`${dataEfetiva}T${hora}`).toISOString(),
       numero_pessoas: pessoas,
       nome_contacto: nome,
       telefone_contacto: telefone || null,
@@ -131,7 +151,7 @@ export function ReservationForm() {
           {t("horaLabel")}
         </h2>
         <TimePills
-          horarios={HORARIOS}
+          horarios={horarios}
           contagens={contagens}
           selecionado={hora}
           onSelect={setHora}

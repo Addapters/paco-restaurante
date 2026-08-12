@@ -1,16 +1,19 @@
 // Configuração do horário de reservas. Fase atual: constantes no
 // código; uma gestão de capacidade por horário configurável pelo
 // admin fica para uma fase futura.
+//
+// Horário de funcionamento:
+//   Domingo a Quinta: 12h–23h
+//   Sexta e Sábado:   12h–01h (do dia seguinte)
 
-export interface FaixaHoraria {
-  inicio: string; // "HH:MM"
-  fim: string; // "HH:MM" (exclusivo)
+const ABERTURA_MINUTOS = 12 * 60; // 12:00
+
+// Fecho em minutos desde a meia-noite do dia escolhido; > 1440 quando
+// o fecho é já no dia seguinte (sexta/sábado, até à 01h).
+function fechoMinutos(diaSemana: number): number {
+  const sextaOuSabado = diaSemana === 5 || diaSemana === 6;
+  return sextaOuSabado ? 24 * 60 + 60 : 23 * 60;
 }
-
-export const FAIXAS_HORARIAS: FaixaHoraria[] = [
-  { inicio: "12:00", fim: "15:00" }, // almoço
-  { inicio: "19:00", fim: "22:00" }, // jantar
-];
 
 export const INTERVALO_MINUTOS = 30;
 
@@ -24,28 +27,28 @@ export const MAX_PESSOAS = 12;
 
 export const DIAS_ANTECEDENCIA = 14;
 
-function paraMinutos(hhmm: string): number {
-  const [h, m] = hhmm.split(":").map(Number);
-  return h * 60 + m;
+export interface HorarioOption {
+  hora: string; // "HH:MM"
+  diaSeguinte: boolean; // true = já é a madrugada do dia seguinte
 }
 
 function paraHHMM(minutos: number): string {
-  const h = Math.floor(minutos / 60)
+  const m = ((minutos % 1440) + 1440) % 1440;
+  const h = Math.floor(m / 60)
     .toString()
     .padStart(2, "0");
-  const m = (minutos % 60).toString().padStart(2, "0");
-  return `${h}:${m}`;
+  const mm = (m % 60).toString().padStart(2, "0");
+  return `${h}:${mm}`;
 }
 
-// Todos os horários disponíveis num dia, a partir das faixas configuradas.
-export function gerarHorarios(): string[] {
-  const horarios: string[] = [];
-  for (const faixa of FAIXAS_HORARIAS) {
-    const inicio = paraMinutos(faixa.inicio);
-    const fim = paraMinutos(faixa.fim);
-    for (let m = inicio; m < fim; m += INTERVALO_MINUTOS) {
-      horarios.push(paraHHMM(m));
-    }
+// Horários disponíveis para uma data (formato "YYYY-MM-DD"), já
+// considerando o fecho depois da meia-noite ao fim de semana.
+export function gerarHorarios(dataIso: string): HorarioOption[] {
+  const diaSemana = new Date(`${dataIso}T00:00:00`).getDay();
+  const fim = fechoMinutos(diaSemana);
+  const horarios: HorarioOption[] = [];
+  for (let m = ABERTURA_MINUTOS; m < fim; m += INTERVALO_MINUTOS) {
+    horarios.push({ hora: paraHHMM(m), diaSeguinte: m >= 24 * 60 });
   }
   return horarios;
 }

@@ -39,9 +39,9 @@
     "contacto": {
       "title": "Where we are",
       "morada": "Address",
-      "moradaPlaceholder": "[ADDRESS TO REPLACE — street, number, postcode, town]",
+      "moradaPlaceholder": "Rua do Passeio Alegre 294, Porto, Portugal 4150-571",
       "horario": "Opening hours",
-      "horarioPlaceholder": "[HOURS TO REPLACE — e.g. Tue–Sun, 12–3pm and 7–11pm]",
+      "horarioPlaceholder": "Sunday to Thursday: 12pm–11pm · Friday and Saturday: 12pm–1am",
       "mapa": "Map to be embedded (Google Maps)"
     }
   },
@@ -187,15 +187,16 @@
       "menosPessoas": "Fewer people",
       "maisPessoas": "More people",
       "gruposGrandes": "For groups larger than {maximo} people, please contact us directly by phone.",
-      "capacidadeNota": "Approximate availability — the team confirms the exact time."
+      "capacidadeNota": "Approximate availability — the team confirms the exact time.",
+      "diaSeguinte": "Early-morning slot, next day"
     },
     "voltar": "Back",
     "tipoCozinha": "Portuguese · Grilled dishes [TO REVIEW]",
     "localizacao": {
       "title": "Location",
       "morada": "Address",
-      "moradaPlaceholder": "[ADDRESS TO REPLACE — street, number, postcode, town]",
-      "horarioPlaceholder": "[HOURS TO REPLACE — e.g. Tue–Sun, 12–3pm and 7–11pm]",
+      "moradaPlaceholder": "Rua do Passeio Alegre 294, Porto, Portugal 4150-571",
+      "horarioPlaceholder": "Sunday to Thursday: 12pm–11pm · Friday and Saturday: 12pm–1am",
       "mapaAlt": "Map (placeholder)"
     }
   },

@@ -39,9 +39,9 @@
     "contacto": {
       "title": "Onde estamos",
       "morada": "Morada",
-      "moradaPlaceholder": "[MORADA A SUBSTITUIR — Rua, nº, código postal, localidade]",
+      "moradaPlaceholder": "Rua do Passeio Alegre 294, Porto, Portugal 4150-571",
       "horario": "Horário",
-      "horarioPlaceholder": "[HORÁRIO A SUBSTITUIR — ex.: ter–dom, 12h–15h e 19h–23h]",
+      "horarioPlaceholder": "Domingo a Quinta: 12h–23h · Sexta e Sábado: 12h–01h",
       "mapa": "Mapa a integrar (Google Maps)"
     }
   },
@@ -187,15 +187,16 @@
       "menosPessoas": "Menos pessoas",
       "maisPessoas": "Mais pessoas",
       "gruposGrandes": "Para grupos com mais de {maximo} pessoas, contacta-nos diretamente por telefone.",
-      "capacidadeNota": "Disponibilidade aproximada — a equipa confirma o horário exato."
+      "capacidadeNota": "Disponibilidade aproximada — a equipa confirma o horário exato.",
+      "diaSeguinte": "Horário da madrugada do dia seguinte"
     },
     "voltar": "Voltar",
     "tipoCozinha": "Portuguesa · Grelhados [A REVER]",
     "localizacao": {
       "title": "Localização",
       "morada": "Morada",
-      "moradaPlaceholder": "[MORADA A SUBSTITUIR — Rua, nº, código postal, localidade]",
-      "horarioPlaceholder": "[HORÁRIO A SUBSTITUIR — ex.: ter–dom, 12h–15h e 19h–23h]",
+      "moradaPlaceholder": "Rua do Passeio Alegre 294, Porto, Portugal 4150-571",
+      "horarioPlaceholder": "Domingo a Quinta: 12h–23h · Sexta e Sábado: 12h–01h",
       "mapaAlt": "Mapa (placeholder)"
     }
   },
