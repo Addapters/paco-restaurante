@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { createAdminClient } from "@/lib/supabase/admin";
+import { getSiteSettings } from "@/lib/site-settings";
 import { SurveyFlow } from "@/components/avaliacao/SurveyFlow";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 
@@ -24,10 +25,11 @@ export default async function AvaliacaoPage({
   searchParams: Promise<{ mesa?: string }>;
 }) {
   const { mesa } = await searchParams;
-  const [t, tCommon, mesaId] = await Promise.all([
+  const [t, tCommon, mesaId, settings] = await Promise.all([
     getTranslations("Avaliacao"),
     getTranslations("Common"),
     validarMesa(mesa),
+    getSiteSettings(),
   ]);
 
   return (
@@ -42,7 +44,10 @@ export default async function AvaliacaoPage({
         <h1 className="mb-8 text-center text-3xl font-bold text-ink">
           {t("title")}
         </h1>
-        <SurveyFlow mesaId={mesaId} />
+        <SurveyFlow
+          mesaId={mesaId}
+          googleReviewsUrl={settings.google_reviews_url}
+        />
       </main>
     </div>
   );

@@ -7,6 +7,7 @@ const TABS = [
   { key: "menu", href: "/admin/menu" },
   { key: "campanhas", href: "/admin/campanhas" },
   { key: "mesas", href: "/admin/mesas" },
+  { key: "definicoes", href: "/admin/definicoes" },
 ] as const;
 
 export function AdminNav({ active }: { active: (typeof TABS)[number]["key"] }) {

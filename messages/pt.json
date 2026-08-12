@@ -130,6 +130,38 @@
       "agora_nao": "Agora não"
     }
   },
+  "Reservas": {
+    "title": "Reservar mesa",
+    "subtitle": "Diz-nos quando vens e quantos são — confirmamos por telefone ou email.",
+    "form": {
+      "title": "Pedido de reserva",
+      "data": "Data",
+      "hora": "Hora",
+      "pessoas": "Número de pessoas",
+      "nome": "Nome",
+      "telefone": "Telefone",
+      "email": "Email",
+      "reservar": "Pedir reserva",
+      "aEnviar": "A enviar…",
+      "erro": "Não foi possível enviar o pedido. Tenta novamente.",
+      "okTitle": "Pedido de reserva enviado!",
+      "okNota": "A tua reserva está pendente — a equipa vai confirmá-la em breve."
+    }
+  },
+  "Footer": {
+    "googleReviews": "Avaliações no Google",
+    "reservar": "Reservar mesa",
+    "semLigacoes": "Links das redes sociais brevemente.",
+    "newsletter": {
+      "titulo": "Novidades e campanhas",
+      "nota": "Deixa o teu email — sem spam, prometido.",
+      "placeholder": "o-teu@email.pt",
+      "subscrever": "Subscrever",
+      "ok": "Subscrição registada. Obrigado!",
+      "duplicado": "Esse email já está subscrito. 👌",
+      "erro": "Não foi possível subscrever. Tenta novamente."
+    }
+  },
   "Fecho": {
     "title": "Fecho de dia",
     "voltar": "Voltar ao painel",
@@ -226,6 +258,18 @@
         "pago": "Registar pago"
       }
     },
+    "reservas": {
+      "title": "Reservas",
+      "vazio": "Sem reservas próximas.",
+      "pessoas": "{count, plural, =1 {1 pessoa} other {# pessoas}}",
+      "estados": {
+        "pendente": "Pendente",
+        "confirmada": "Confirmada",
+        "cancelada": "Cancelada"
+      },
+      "confirmar": "Confirmar",
+      "cancelar": "Cancelar"
+    },
     "ofertas": {
       "marcar": "Marcar como oferta",
       "desmarcar": "Remover oferta",
@@ -269,7 +313,27 @@
       "dashboard": "Dashboard",
       "menu": "Menu",
       "campanhas": "Campanhas",
-      "mesas": "Mesas"
+      "mesas": "Mesas",
+      "definicoes": "Definições"
+    },
+    "definicoes": {
+      "ligacoes": {
+        "title": "Ligações informativas",
+        "nota": "Aparecem no rodapé do site e no fluxo de avaliação.",
+        "google": "Link de avaliações do Google"
+      },
+      "guardar": "Guardar",
+      "aGuardar": "A guardar…",
+      "guardado": "Guardado",
+      "erro": "Não foi possível guardar.",
+      "integracoes": {
+        "title": "Integrações futuras",
+        "nota": "TheFork e Uber Eats são, por agora, apenas registos informativos nos pedidos do staff — sem qualquer chamada de API real. Quando a integração for contratada, ativa-se aqui.",
+        "thefork": "TheFork — reservas automáticas",
+        "uber": "Uber Eats — pedidos automáticos",
+        "estadoInformativo": "Atualmente: registo manual informativo",
+        "brevemente": "Brevemente"
+      }
     },
     "dashboard": {
       "pacoAi": {

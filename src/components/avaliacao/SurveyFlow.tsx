@@ -7,8 +7,8 @@ import { getSurveyRouter } from "@/lib/paco-ai";
 import { Button, Card, CardTitle } from "@/components/ui";
 import { cn } from "@/lib/utils";
 
-// URL de avaliações do Google (configurável por ambiente)
-const GOOGLE_REVIEWS_URL =
+// Fallback quando o link não está definido em /admin/definicoes
+const GOOGLE_REVIEWS_FALLBACK =
   process.env.NEXT_PUBLIC_GOOGLE_REVIEWS_URL ??
   "https://www.google.com/maps/search/paco+restaurante";
 
@@ -18,7 +18,14 @@ const surveyRouter = getSurveyRouter();
 
 type Step = "pergunta" | "formulario" | "obrigado" | "redirecionar";
 
-export function SurveyFlow({ mesaId }: { mesaId: string | null }) {
+export function SurveyFlow({
+  mesaId,
+  googleReviewsUrl,
+}: {
+  mesaId: string | null;
+  googleReviewsUrl?: string | null;
+}) {
+  const GOOGLE_REVIEWS_URL = googleReviewsUrl ?? GOOGLE_REVIEWS_FALLBACK;
   const t = useTranslations("Avaliacao");
   const [step, setStep] = useState<Step>("pergunta");
   const [pontuacao, setPontuacao] = useState<number | null>(null);

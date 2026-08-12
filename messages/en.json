@@ -130,6 +130,38 @@
       "agora_nao": "Not now"
     }
   },
+  "Reservas": {
+    "title": "Book a table",
+    "subtitle": "Tell us when you're coming and how many — we'll confirm by phone or email.",
+    "form": {
+      "title": "Reservation request",
+      "data": "Date",
+      "hora": "Time",
+      "pessoas": "Number of people",
+      "nome": "Name",
+      "telefone": "Phone",
+      "email": "Email",
+      "reservar": "Request reservation",
+      "aEnviar": "Sending…",
+      "erro": "We couldn't send your request. Please try again.",
+      "okTitle": "Reservation request sent!",
+      "okNota": "Your reservation is pending — the team will confirm it shortly."
+    }
+  },
+  "Footer": {
+    "googleReviews": "Google reviews",
+    "reservar": "Book a table",
+    "semLigacoes": "Social links coming soon.",
+    "newsletter": {
+      "titulo": "News and specials",
+      "nota": "Leave your email — no spam, promised.",
+      "placeholder": "your@email.com",
+      "subscrever": "Subscribe",
+      "ok": "Subscription saved. Thank you!",
+      "duplicado": "That email is already subscribed. 👌",
+      "erro": "We couldn't subscribe you. Please try again."
+    }
+  },
   "Fecho": {
     "title": "End of day",
     "voltar": "Back to dashboard",
@@ -226,6 +258,18 @@
         "pago": "Mark paid"
       }
     },
+    "reservas": {
+      "title": "Reservations",
+      "vazio": "No upcoming reservations.",
+      "pessoas": "{count, plural, =1 {1 person} other {# people}}",
+      "estados": {
+        "pendente": "Pending",
+        "confirmada": "Confirmed",
+        "cancelada": "Cancelled"
+      },
+      "confirmar": "Confirm",
+      "cancelar": "Cancel"
+    },
     "ofertas": {
       "marcar": "Mark as on the house",
       "desmarcar": "Remove offer",
@@ -269,7 +313,27 @@
       "dashboard": "Dashboard",
       "menu": "Menu",
       "campanhas": "Specials",
-      "mesas": "Tables"
+      "mesas": "Tables",
+      "definicoes": "Settings"
+    },
+    "definicoes": {
+      "ligacoes": {
+        "title": "Informational links",
+        "nota": "Shown in the site footer and in the review flow.",
+        "google": "Google reviews link"
+      },
+      "guardar": "Save",
+      "aGuardar": "Saving…",
+      "guardado": "Saved",
+      "erro": "We couldn't save.",
+      "integracoes": {
+        "title": "Future integrations",
+        "nota": "TheFork and Uber Eats are, for now, informative-only entries in staff orders — no real API calls. Once an integration is contracted, it gets enabled here.",
+        "thefork": "TheFork — automatic reservations",
+        "uber": "Uber Eats — automatic orders",
+        "estadoInformativo": "Currently: manual informative entry",
+        "brevemente": "Coming soon"
+      }
     },
     "dashboard": {
       "pacoAi": {

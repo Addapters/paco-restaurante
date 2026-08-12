@@ -34,13 +34,21 @@ export default async function StaffPage({
     });
   }
 
-  const t = await getTranslations("Fecho");
+  const [t, tStaff] = await Promise.all([
+    getTranslations("Fecho"),
+    getTranslations("StaffPanel"),
+  ]);
 
   return (
     <div className="space-y-8">
       <div className="flex items-center justify-between">
         <p className="text-sm text-smoke">{profile!.nome}</p>
         <div className="flex items-center gap-2">
+          <Link href="/staff/reservas">
+            <Button variant="outline" size="sm">
+              🗓 {tStaff("reservas.title")}
+            </Button>
+          </Link>
           <Link href="/staff/fecho">
             <Button variant="outline" size="sm">
               💶 {t("title")}
