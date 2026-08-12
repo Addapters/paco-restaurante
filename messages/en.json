@@ -34,7 +34,8 @@
       "texto": "[TEXT TO REPLACE] Paco is a family restaurant where the table is always set like at home. We cook the Portuguese classics with seasonal produce, serve with time and care — and the name? It belongs to the house dog, who greets the regulars at the door. Come meet us; the first visit is never the last."
     },
     "destaques": {
-      "title": "House suggestions"
+      "title": "House suggestions",
+      "verMenu": "See full menu"
     },
     "contacto": {
       "title": "Where we are",
@@ -43,6 +44,36 @@
       "horario": "Opening hours",
       "horarioPlaceholder": "Sunday to Thursday: 12pm–11pm · Friday and Saturday: 12pm–1am",
       "mapa": "Map to be embedded (Google Maps)"
+    },
+    "nav": {
+      "sobre": "About",
+      "menu": "Menu",
+      "localizacao": "Location"
+    },
+    "hero": {
+      "titulo": "[TEXT TO REVIEW] Flavours you already know, a place worth coming back to"
+    },
+    "testemunhos": {
+      "title": "Once you visit, you come back",
+      "nota": "[PLACEHOLDER TESTIMONIALS — replace with real customer reviews]",
+      "verTodas": "See all reviews on Google",
+      "itens": [
+        {
+          "nome": "Cristina M.",
+          "texto": "Cozy atmosphere and food that tastes like grandma's kitchen. It's already our Sunday spot.",
+          "estrelas": 5
+        },
+        {
+          "nome": "Rui P.",
+          "texto": "The Bacalhau à Braga is some of the best I've had in Porto. Attentive, unhurried service.",
+          "estrelas": 5
+        },
+        {
+          "nome": "Beatriz S.",
+          "texto": "We always come back whenever we're in Porto. Fair prices and a friendly team.",
+          "estrelas": 4
+        }
+      ]
     }
   },
   "Cliente": {
@@ -212,6 +243,13 @@
       "ok": "Subscription saved. Thank you!",
       "duplicado": "That email is already subscribed.",
       "erro": "We couldn't subscribe you. Please try again."
+    },
+    "sitemap": {
+      "sobre": "About",
+      "menu": "Menu",
+      "reservas": "Reservations",
+      "localizacao": "Location",
+      "redes": "Social media"
     }
   },
   "Fecho": {

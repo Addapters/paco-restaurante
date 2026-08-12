@@ -34,7 +34,8 @@
       "texto": "[TEXTO A SUBSTITUIR] O Paco é um restaurante de família onde a mesa é sempre posta como em casa. Cozinhamos os clássicos portugueses com produto da época, servimos com tempo e gosto, e o nome? É do cão da casa, que recebe os habitués à porta. Vem conhecer-nos — a primeira visita nunca é a última."
     },
     "destaques": {
-      "title": "Sugestões da casa"
+      "title": "Sugestões da casa",
+      "verMenu": "Ver menu completo"
     },
     "contacto": {
       "title": "Onde estamos",
@@ -43,6 +44,36 @@
       "horario": "Horário",
       "horarioPlaceholder": "Domingo a Quinta: 12h–23h · Sexta e Sábado: 12h–01h",
       "mapa": "Mapa a integrar (Google Maps)"
+    },
+    "nav": {
+      "sobre": "Sobre",
+      "menu": "Menu",
+      "localizacao": "Localização"
+    },
+    "hero": {
+      "titulo": "[TEXTO A REVER] Sabores que já conhece, num sítio para voltar sempre"
+    },
+    "testemunhos": {
+      "title": "Quem nos visita, volta",
+      "nota": "[TESTEMUNHOS PLACEHOLDER — substituir por avaliações reais dos clientes]",
+      "verTodas": "Ver todas as avaliações no Google",
+      "itens": [
+        {
+          "nome": "Cristina M.",
+          "texto": "Ambiente acolhedor e comida que sabe a casa de avó. Já é o nosso lugar de domingo.",
+          "estrelas": 5
+        },
+        {
+          "nome": "Rui P.",
+          "texto": "O bacalhau à Braga é dos melhores que já provei no Porto. Serviço atencioso, sem pressa.",
+          "estrelas": 5
+        },
+        {
+          "nome": "Beatriz S.",
+          "texto": "Voltamos sempre que passamos pelo Porto. Preços justos e uma equipa simpática.",
+          "estrelas": 4
+        }
+      ]
     }
   },
   "Cliente": {
@@ -212,6 +243,13 @@
       "ok": "Subscrição registada. Obrigado!",
       "duplicado": "Esse email já está subscrito.",
       "erro": "Não foi possível subscrever. Tenta novamente."
+    },
+    "sitemap": {
+      "sobre": "Sobre",
+      "menu": "Menu",
+      "reservas": "Reservas",
+      "localizacao": "Localização",
+      "redes": "Redes sociais"
     }
   },
   "Fecho": {

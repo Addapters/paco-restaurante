@@ -1,7 +1,7 @@
 import { type ButtonHTMLAttributes } from "react";
 import { cn } from "@/lib/utils";
 
-type Variant = "primary" | "secondary" | "outline" | "ghost";
+type Variant = "primary" | "secondary" | "outline" | "outlineLight" | "ghost";
 type Size = "sm" | "md" | "lg";
 
 const variants: Record<Variant, string> = {
@@ -11,6 +11,9 @@ const variants: Record<Variant, string> = {
     "bg-sage text-white hover:bg-sage-dark focus-visible:outline-sage",
   outline:
     "border border-ink/30 text-ink hover:bg-ink/5 focus-visible:outline-ink",
+  // Contorno claro para usar sobre imagens/fundos escuros (ex.: hero)
+  outlineLight:
+    "border border-white/70 text-white hover:bg-white/10 focus-visible:outline-white",
   ghost: "text-ink hover:bg-ink/5 focus-visible:outline-ink",
 };
 
