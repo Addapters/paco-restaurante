@@ -7,6 +7,9 @@ import { createClient } from "@/lib/supabase/client";
 import { Button, Card } from "@/components/ui";
 import { EstadoBadge, type OrderEstado } from "@/components/EstadoBadge";
 import { NewOrderForm } from "./NewOrderForm";
+import { PaymentDialog } from "./PaymentDialog";
+import { Link } from "@/i18n/navigation";
+import type { ResultadoPagamento } from "@/app/actions/faturacao";
 import { formatPrice } from "@/lib/format";
 import { cn } from "@/lib/utils";
 
@@ -42,17 +45,24 @@ export interface StaffOrder {
     quantidade: number;
     preco_unitario: number;
     e_oferta: boolean;
+    motivo_oferta: string | null;
     menu_items: { nome_pt: string; nome_en: string } | null;
   }[];
 }
 
-const ORDER_SELECT =
-  "id, mesa_id, origem, estado, criado_em, restaurant_tables(numero), order_items(id, quantidade, preco_unitario, e_oferta, menu_items(nome_pt, nome_en))";
+interface InvoiceRef {
+  numero_fatura: string;
+  url: string | null;
+}
 
+const ORDER_SELECT =
+  "id, mesa_id, origem, estado, criado_em, restaurant_tables(numero), order_items(id, quantidade, preco_unitario, e_oferta, motivo_oferta, menu_items(nome_pt, nome_en))";
+
+// "servido → pago" passa pelo diálogo de pagamento (método + fatura),
+// não pelo avanço direto de estado.
 const PROXIMO_ESTADO: Partial<Record<OrderEstado, OrderEstado>> = {
   pendente: "em_preparacao",
   em_preparacao: "servido",
-  servido: "pago",
 };
 
 const ESTADOS: OrderEstado[] = ["pendente", "em_preparacao", "servido", "pago"];
@@ -72,6 +82,14 @@ export function StaffDashboard() {
   const [mesas, setMesas] = useState<Mesa[]>([]);
   const [alerts, setAlerts] = useState<TableAlert[]>([]);
   const [orders, setOrders] = useState<StaffOrder[]>([]);
+  const [invoices, setInvoices] = useState<Map<string, InvoiceRef>>(new Map());
+  const [pagamentoDe, setPagamentoDe] = useState<StaffOrder | null>(null);
+  // Item em marcação de oferta: pede o motivo antes de gravar
+  const [ofertaDe, setOfertaDe] = useState<{
+    orderId: string;
+    itemId: string;
+  } | null>(null);
+  const [motivoOferta, setMotivoOferta] = useState("");
 
   const fetchOrderById = useCallback(
     async (id: string): Promise<StaffOrder | null> => {
@@ -88,22 +106,42 @@ export function StaffDashboard() {
   // Carga inicial
   useEffect(() => {
     (async () => {
-      const [{ data: m }, { data: a }, { data: o }] = await Promise.all([
-        supabase.from("restaurant_tables").select("id, numero").order("numero"),
-        supabase
-          .from("table_alerts")
-          .select("id, mesa_id, tipo, estado, criado_em")
-          .eq("estado", "pendente")
-          .order("criado_em"),
-        supabase
-          .from("orders")
-          .select(ORDER_SELECT)
-          .order("criado_em", { ascending: false })
-          .limit(50),
-      ]);
+      const [{ data: m }, { data: a }, { data: o }, { data: inv }] =
+        await Promise.all([
+          supabase
+            .from("restaurant_tables")
+            .select("id, numero")
+            .order("numero"),
+          supabase
+            .from("table_alerts")
+            .select("id, mesa_id, tipo, estado, criado_em")
+            .eq("estado", "pendente")
+            .order("criado_em"),
+          supabase
+            .from("orders")
+            .select(ORDER_SELECT)
+            .order("criado_em", { ascending: false })
+            .limit(50),
+          supabase
+            .from("invoices")
+            .select("order_id, numero_fatura, url")
+            .order("criado_em", { ascending: false })
+            .limit(100),
+        ]);
       setMesas((m as Mesa[]) ?? []);
       setAlerts((a as TableAlert[]) ?? []);
       setOrders((o as unknown as StaffOrder[]) ?? []);
+      setInvoices(
+        new Map(
+          (
+            (inv as { order_id: string; numero_fatura: string; url: string | null }[]) ??
+            []
+          ).map((i) => [
+            i.order_id,
+            { numero_fatura: i.numero_fatura, url: i.url },
+          ])
+        )
+      );
     })();
   }, [supabase]);
 
@@ -187,6 +225,56 @@ export function StaffDashboard() {
         prev.map((o) => (o.id === order.id ? { ...o, estado: order.estado } : o))
       );
     }
+  }
+
+  function onPago(orderId: string, resultado: ResultadoPagamento) {
+    setOrders((prev) =>
+      prev.map((o) => (o.id === orderId ? { ...o, estado: "pago" } : o))
+    );
+    if (resultado.numeroFatura) {
+      setInvoices((prev) =>
+        new Map(prev).set(orderId, {
+          numero_fatura: resultado.numeroFatura!,
+          url: resultado.faturaUrl ?? null,
+        })
+      );
+    }
+  }
+
+  async function marcarOferta(orderId: string, itemId: string, motivo: string) {
+    const patch = { e_oferta: true, motivo_oferta: motivo || null };
+    setOrders((prev) =>
+      prev.map((o) =>
+        o.id === orderId
+          ? {
+              ...o,
+              order_items: o.order_items.map((i) =>
+                i.id === itemId ? { ...i, ...patch } : i
+              ),
+            }
+          : o
+      )
+    );
+    setOfertaDe(null);
+    setMotivoOferta("");
+    await supabase.from("order_items").update(patch).eq("id", itemId);
+  }
+
+  async function desmarcarOferta(orderId: string, itemId: string) {
+    const patch = { e_oferta: false, motivo_oferta: null };
+    setOrders((prev) =>
+      prev.map((o) =>
+        o.id === orderId
+          ? {
+              ...o,
+              order_items: o.order_items.map((i) =>
+                i.id === itemId ? { ...i, ...patch } : i
+              ),
+            }
+          : o
+      )
+    );
+    await supabase.from("order_items").update(patch).eq("id", itemId);
   }
 
   // Estado de cada mesa: alerta pendente > ocupada (pedido ativo) > livre
@@ -334,19 +422,106 @@ export function StaffDashboard() {
                           {t(`novoPedido.origens.${order.origem}`)}
                         </span>
                       )}
-                      <ul className="mt-2 space-y-0.5 text-sm text-ink">
-                        {order.order_items.map((item) => (
-                          <li key={item.id}>
-                            {item.quantidade}×{" "}
-                            {item.menu_items
-                              ? locale === "pt"
-                                ? item.menu_items.nome_pt
-                                : item.menu_items.nome_en
-                              : "—"}
-                          </li>
-                        ))}
+                      <ul className="mt-2 space-y-1 text-sm text-ink">
+                        {order.order_items.map((item) => {
+                          const emEdicao =
+                            ofertaDe?.orderId === order.id &&
+                            ofertaDe?.itemId === item.id;
+                          return (
+                            <li key={item.id}>
+                              <div className="flex items-center justify-between gap-2">
+                                <span className="min-w-0 flex-1 truncate">
+                                  {item.quantidade}×{" "}
+                                  {item.menu_items
+                                    ? locale === "pt"
+                                      ? item.menu_items.nome_pt
+                                      : item.menu_items.nome_en
+                                    : "—"}
+                                </span>
+                                {item.e_oferta ? (
+                                  <span className="flex shrink-0 items-center gap-1 text-xs">
+                                    <s className="text-smoke">
+                                      {formatPrice(
+                                        item.preco_unitario * item.quantidade,
+                                        locale
+                                      )}
+                                    </s>
+                                    <span className="font-semibold text-sage-dark">
+                                      {formatPrice(0, locale)}
+                                    </span>
+                                    {estado !== "pago" && (
+                                      <button
+                                        className="text-smoke hover:text-ink"
+                                        title={t("ofertas.desmarcar")}
+                                        onClick={() =>
+                                          desmarcarOferta(order.id, item.id)
+                                        }
+                                      >
+                                        ✕
+                                      </button>
+                                    )}
+                                  </span>
+                                ) : (
+                                  estado !== "pago" && (
+                                    <button
+                                      className="shrink-0 text-sm opacity-50 hover:opacity-100"
+                                      title={t("ofertas.marcar")}
+                                      onClick={() => {
+                                        setOfertaDe({
+                                          orderId: order.id,
+                                          itemId: item.id,
+                                        });
+                                        setMotivoOferta("");
+                                      }}
+                                    >
+                                      🎁
+                                    </button>
+                                  )
+                                )}
+                              </div>
+                              {item.e_oferta && item.motivo_oferta && (
+                                <p className="text-xs text-smoke">
+                                  🎁 {item.motivo_oferta}
+                                </p>
+                              )}
+                              {emEdicao && (
+                                <div className="mt-1 flex items-center gap-2">
+                                  <input
+                                    autoFocus
+                                    value={motivoOferta}
+                                    onChange={(e) =>
+                                      setMotivoOferta(e.target.value)
+                                    }
+                                    placeholder={t("ofertas.motivo")}
+                                    className="h-8 min-w-0 flex-1 rounded-lg border border-ink/20 bg-paper px-2 text-xs text-ink placeholder:text-smoke focus:border-terracotta focus:outline-none"
+                                  />
+                                  <Button
+                                    size="sm"
+                                    variant="secondary"
+                                    onClick={() =>
+                                      marcarOferta(
+                                        order.id,
+                                        item.id,
+                                        motivoOferta
+                                      )
+                                    }
+                                  >
+                                    ✓
+                                  </Button>
+                                  <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    onClick={() => setOfertaDe(null)}
+                                  >
+                                    ✕
+                                  </Button>
+                                </div>
+                              )}
+                            </li>
+                          );
+                        })}
                       </ul>
-                      <div className="mt-3 flex items-center justify-between gap-2 border-t border-ink/10 pt-2">
+                      <div className="mt-3 flex flex-wrap items-center justify-between gap-2 border-t border-ink/10 pt-2">
                         <span className="text-sm font-bold text-ink">
                           {formatPrice(total, locale)}
                         </span>
@@ -355,6 +530,29 @@ export function StaffDashboard() {
                             {t(`pedidos.acao.${proximo}`)} →
                           </Button>
                         )}
+                        {estado === "servido" && (
+                          <Button size="sm" onClick={() => setPagamentoDe(order)}>
+                            {t("pedidos.acao.pago")} →
+                          </Button>
+                        )}
+                        {estado === "pago" &&
+                          (() => {
+                            const inv = invoices.get(order.id);
+                            if (!inv) return null;
+                            return inv.url ? (
+                              <Link
+                                href={inv.url}
+                                target="_blank"
+                                className="text-xs font-medium text-sage-dark underline-offset-2 hover:underline"
+                              >
+                                🧾 {inv.numero_fatura}
+                              </Link>
+                            ) : (
+                              <span className="text-xs text-smoke">
+                                🧾 {inv.numero_fatura}
+                              </span>
+                            );
+                          })()}
                       </div>
                     </Card>
                   );
@@ -364,6 +562,14 @@ export function StaffDashboard() {
           })}
         </div>
       </section>
+
+      {pagamentoDe && (
+        <PaymentDialog
+          order={pagamentoDe}
+          onClose={() => setPagamentoDe(null)}
+          onPaid={onPago}
+        />
+      )}
     </div>
   );
 }

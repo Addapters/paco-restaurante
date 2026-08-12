@@ -123,6 +123,17 @@
       "agora_nao": "Not now"
     }
   },
+  "Fatura": {
+    "numero": "Document",
+    "mesa": "Table {numero}",
+    "item": "Item",
+    "qtd": "Qty",
+    "preco": "Price",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "oferta": "On the house",
+    "avisoDemo": "Demo document — not a fiscal invoice. Issued by the mock provider (ref. {ref}); it will be replaced by the certified invoicing provider once chosen."
+  },
   "Staff": {
     "title": "Staff Area",
     "description": "Here you'll be able to manage orders and floor service."
@@ -172,6 +183,29 @@
         "servido": "Serve",
         "pago": "Mark paid"
       }
+    },
+    "ofertas": {
+      "marcar": "Mark as on the house",
+      "desmarcar": "Remove offer",
+      "motivo": "Reason (e.g. birthday)"
+    },
+    "pagamento": {
+      "title": "Payment — Table {mesa}",
+      "nota": "For the record only: the actual payment happens on the restaurant's physical terminal.",
+      "metodos": {
+        "dinheiro": "Cash",
+        "multibanco_tpa": "Card (terminal)",
+        "parceiro": "Partner platform"
+      },
+      "confirmar": "Confirm payment",
+      "aConfirmar": "Recording…",
+      "cancelar": "Cancel",
+      "erro": "We couldn't record the payment.",
+      "pagoTitle": "Payment recorded",
+      "faturaEmitida": "Invoice {numero} issued.",
+      "faturaFalhou": "Payment recorded, but the invoice could not be issued — it can be issued later.",
+      "verFatura": "View invoice",
+      "fechar": "Close"
     },
     "login": {
       "title": "Staff sign in",

@@ -123,6 +123,17 @@
       "agora_nao": "Agora não"
     }
   },
+  "Fatura": {
+    "numero": "Documento",
+    "mesa": "Mesa {numero}",
+    "item": "Item",
+    "qtd": "Qtd.",
+    "preco": "Preço",
+    "subtotal": "Subtotal",
+    "total": "Total",
+    "oferta": "Oferta",
+    "avisoDemo": "Documento de demonstração — não é uma fatura fiscal. Emitido pelo provedor mock (ref. {ref}); será substituído pelo provedor de faturação certificado quando for escolhido."
+  },
   "Staff": {
     "title": "Área de Staff",
     "description": "Aqui vais poder gerir pedidos e o serviço de sala."
@@ -172,6 +183,29 @@
         "servido": "Servir",
         "pago": "Registar pago"
       }
+    },
+    "ofertas": {
+      "marcar": "Marcar como oferta",
+      "desmarcar": "Remover oferta",
+      "motivo": "Motivo da oferta (ex.: aniversário)"
+    },
+    "pagamento": {
+      "title": "Pagamento — Mesa {mesa}",
+      "nota": "Registo informativo: o pagamento é processado no TPA físico do restaurante.",
+      "metodos": {
+        "dinheiro": "Dinheiro",
+        "multibanco_tpa": "Multibanco (TPA)",
+        "parceiro": "Plataforma parceira"
+      },
+      "confirmar": "Confirmar pagamento",
+      "aConfirmar": "A registar…",
+      "cancelar": "Cancelar",
+      "erro": "Não foi possível registar o pagamento.",
+      "pagoTitle": "Pagamento registado",
+      "faturaEmitida": "Fatura {numero} emitida.",
+      "faturaFalhou": "Pagamento registado, mas a emissão da fatura falhou — pode ser emitida mais tarde.",
+      "verFatura": "Ver fatura",
+      "fechar": "Fechar"
     },
     "login": {
       "title": "Entrar na área de staff",
