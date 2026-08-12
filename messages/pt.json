@@ -102,6 +102,27 @@
     "contaPedida": "A conta está a caminho.",
     "alertaErro": "Não foi possível avisar a equipa. Tenta novamente."
   },
+  "Avaliacao": {
+    "title": "A tua opinião conta",
+    "pergunta": "Como correu a tua refeição?",
+    "perguntaNota": "Toca nas estrelas para avaliar de 1 a 5.",
+    "estrelas": "{count, plural, =1 {1 estrela} other {# estrelas}}",
+    "lamentamos": "Lamentamos que não tenha corrido melhor",
+    "formularioIntro": "Conta-nos o que aconteceu — a tua mensagem vai diretamente para a gerência e ajuda-nos a melhorar.",
+    "comentarioPlaceholder": "Sugestões, reclamações, o que quiseres partilhar…",
+    "enviar": "Enviar",
+    "aEnviar": "A enviar…",
+    "obrigadoTitle": "Obrigado!",
+    "obrigadoPrivado": "Recebemos a tua mensagem. Vamos ler com atenção — esperamos fazer melhor na próxima visita.",
+    "aRedirecionar": "A tua avaliação foi registada. A abrir o Google Reviews…",
+    "erro": "Não foi possível registar a avaliação. Tenta novamente.",
+    "convite": {
+      "title": "Obrigado pela visita!",
+      "subtitle": "Conta-nos como correu a refeição — demora menos de um minuto.",
+      "avaliar": "Avaliar",
+      "agora_nao": "Agora não"
+    }
+  },
   "Staff": {
     "title": "Área de Staff",
     "description": "Aqui vais poder gerir pedidos e o serviço de sala."

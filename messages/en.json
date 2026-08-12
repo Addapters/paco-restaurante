@@ -102,6 +102,27 @@
     "contaPedida": "The bill is on its way.",
     "alertaErro": "We couldn't reach the team. Please try again."
   },
+  "Avaliacao": {
+    "title": "Your opinion matters",
+    "pergunta": "How was your meal?",
+    "perguntaNota": "Tap the stars to rate from 1 to 5.",
+    "estrelas": "{count, plural, =1 {1 star} other {# stars}}",
+    "lamentamos": "We're sorry it wasn't better",
+    "formularioIntro": "Tell us what happened — your message goes straight to the management and helps us improve.",
+    "comentarioPlaceholder": "Suggestions, complaints, anything you'd like to share…",
+    "enviar": "Send",
+    "aEnviar": "Sending…",
+    "obrigadoTitle": "Thank you!",
+    "obrigadoPrivado": "We've received your message. We'll read it carefully — we hope to do better on your next visit.",
+    "aRedirecionar": "Your rating has been saved. Opening Google Reviews…",
+    "erro": "We couldn't save your rating. Please try again.",
+    "convite": {
+      "title": "Thanks for visiting!",
+      "subtitle": "Tell us how your meal went — it takes less than a minute.",
+      "avaliar": "Rate us",
+      "agora_nao": "Not now"
+    }
+  },
   "Staff": {
     "title": "Staff Area",
     "description": "Here you'll be able to manage orders and floor service."

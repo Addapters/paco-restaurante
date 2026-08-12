@@ -46,6 +46,10 @@ interface MesaOrdersContextValue {
   submitOrder(): Promise<boolean>;
   orders: OrderRow[];
   sendAlert(tipo: AlertTipo): Promise<boolean>;
+  // Fica true quando um pedido desta sessão transita para "pago"
+  // (gatilho do convite ao inquérito de satisfação)
+  refeicaoPaga: boolean;
+  dismissRefeicaoPaga(): void;
 }
 
 const MesaOrdersContext = createContext<MesaOrdersContextValue | null>(null);
@@ -65,6 +69,7 @@ export function MesaOrdersProvider({
   const [orders, setOrders] = useState<OrderRow[]>([]);
   const [submitting, setSubmitting] = useState(false);
   const [uid, setUid] = useState<string | null>(null);
+  const [refeicaoPaga, setRefeicaoPaga] = useState(false);
 
   const ensureUid = useCallback(async (): Promise<string | null> => {
     const {
@@ -119,6 +124,7 @@ export function MesaOrdersProvider({
         },
         (payload) => {
           const updated = payload.new as { id: string; estado: OrderEstado };
+          if (updated.estado === "pago") setRefeicaoPaga(true);
           setOrders((prev) =>
             prev.map((o) =>
               o.id === updated.id ? { ...o, estado: updated.estado } : o
@@ -206,6 +212,8 @@ export function MesaOrdersProvider({
         submitOrder,
         orders,
         sendAlert,
+        refeicaoPaga,
+        dismissRefeicaoPaga: () => setRefeicaoPaga(false),
       }}
     >
       {children}

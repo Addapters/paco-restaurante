@@ -11,6 +11,7 @@ import { MesaOrdersProvider } from "@/components/mesa/MesaOrdersProvider";
 import { TableActions } from "@/components/mesa/TableActions";
 import { OrdersHistory } from "@/components/mesa/OrdersHistory";
 import { CartBar } from "@/components/mesa/CartBar";
+import { SurveyInvite } from "@/components/mesa/SurveyInvite";
 import { LocaleSwitcher } from "@/components/LocaleSwitcher";
 
 const UUID_RE =
@@ -133,6 +134,7 @@ export default async function MesaPage({
       </footer>
 
       <CartBar />
+      <SurveyInvite />
     </div>
     </MesaOrdersProvider>
   );
